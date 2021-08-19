@@ -8,12 +8,12 @@ const getters: GetterTree<ProductState, RootState> = {
     return state.error;
   },
 
-  getLoading(state) {
-    return state.loading;
-  },
-
   getItems(state) {
     return state.items;
+  },
+
+  getLoading(state) {
+    return state.loading;
   },
 };
 
