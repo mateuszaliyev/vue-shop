@@ -1,21 +1,21 @@
 <template>
-  <header class="container">
+  <header class="container dark header">
     <div class="logo">Logo</div>
-    <icon-button class="button" @click="handleClick" icon="bars"></icon-button>
+    <icon-button @click="handleClick" icon="bars"></icon-button>
   </header>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 
-import IconButton from "@/components/IconButton.vue";
+import IconButton from "@/components/input/IconButton.vue";
 
 @Component({
   components: {
     IconButton,
   },
 })
-export default class Header extends Vue {
+export default class TheHeader extends Vue {
   handleClick(): void {
     console.log("clicked");
   }
@@ -23,23 +23,23 @@ export default class Header extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@use "../styles/colors";
+@use "../../styles/breakpoints";
+@use "../../styles/colors";
 
-.button {
-  padding: 2.4rem 1.6rem;
-}
-
-.container {
-  background: colors.$background-i;
-  color: colors.$text-primary-i;
+.header {
   display: flex;
   font-size: 2.4rem;
   justify-content: space-between;
+  padding-bottom: 2.4rem;
+  padding-top: 2.4rem;
+
+  @include breakpoints.respond-to("lg") {
+    display: none;
+  }
 }
 
 .logo {
   letter-spacing: 0.162em;
-  padding: 2.4rem 1.6rem;
   text-transform: uppercase;
 }
 </style>

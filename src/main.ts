@@ -3,13 +3,17 @@ import App from "@/App.vue";
 import router from "@/router";
 import store from "@/store";
 
+import frag from "vue-frag";
+
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faBars } from "@fortawesome/free-solid-svg-icons/faBars";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
-library.add(faBars);
+import icons from "@/lib/fontawesome";
+
+library.add(...icons);
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);
+Vue.directive("frag", frag);
 
 Vue.config.productionTip = false;
 

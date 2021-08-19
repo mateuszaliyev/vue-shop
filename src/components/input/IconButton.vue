@@ -22,6 +22,7 @@ export default class IconButton extends Vue {
   background: transparent;
   border: none;
   color: inherit;
+  cursor: pointer;
   font-size: inherit;
   outline: none;
 }

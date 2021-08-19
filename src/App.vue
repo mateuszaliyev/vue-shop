@@ -1,7 +1,8 @@
 <template>
   <div id="app">
-    <Header />
-    <router-view />
+    <the-layout>
+      <router-view />
+    </the-layout>
   </div>
 </template>
 
@@ -10,11 +11,11 @@ import "@fontsource/montserrat";
 import "@fontsource/roboto";
 
 import { Component, Vue } from "vue-property-decorator";
-import Header from "@/components/Header.vue";
+import TheLayout from "@/components/layout/TheLayout.vue";
 
 @Component({
   components: {
-    Header,
+    TheLayout,
   },
 })
 export default class App extends Vue {
@@ -25,6 +26,7 @@ export default class App extends Vue {
 </script>
 
 <style lang="scss">
+@use "styles/breakpoints";
 @use "styles/colors";
 @use "styles/fonts";
 
@@ -47,5 +49,20 @@ body {
   font-family: fonts.$primary;
   font-size: 1.6rem;
   line-height: 1.5;
+  scroll-behavior: smooth;
+}
+
+.container {
+  @include breakpoints.container;
+}
+
+.dark {
+  background: colors.$background-i;
+  color: colors.$text-primary-i;
+}
+
+.light {
+  background: colors.$gray-100;
+  color: colors.$text-primary-i;
 }
 </style>
