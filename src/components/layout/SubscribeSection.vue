@@ -2,8 +2,10 @@
   <section class="container dark subscribe">
     <h1 class="heading">Subscribe</h1>
     <p class="paragraph">To get special offers and VIP treatment:</p>
-    <the-input class="input" placeholder="Enter e-mail" />
-    <the-button class="button" color="primary">Subscribe</the-button>
+    <form @submit.prevent="handleSubmit">
+      <the-input class="input" placeholder="Enter e-mail" v-model="email" />
+      <the-button class="button" color="primary">Subscribe</the-button>
+    </form>
   </section>
 </template>
 
@@ -19,13 +21,19 @@ import TheInput from "@/components/input/TheInput.vue";
     TheInput,
   },
 })
-export default class SubscribeSection extends Vue {}
+export default class SubscribeSection extends Vue {
+  email = "";
+
+  handleSubmit(): void {
+    console.log(this.email);
+  }
+}
 </script>
 
 <style lang="scss" scoped>
 .button {
   font-size: 1.5rem;
-  margin: 1.6rem 0;
+  margin: 1.5rem 0 1.6rem;
 }
 
 .heading {
@@ -35,6 +43,7 @@ export default class SubscribeSection extends Vue {}
 }
 
 .input {
+  font-size: 1.5rem;
   width: 100%;
 }
 

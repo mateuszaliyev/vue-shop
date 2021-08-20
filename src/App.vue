@@ -42,6 +42,11 @@ export default class App extends Vue {
   padding: 0;
 }
 
+a {
+  color: inherit;
+  text-decoration: underline;
+}
+
 html,
 body {
   background: colors.$background;
@@ -63,6 +68,6 @@ body {
 
 .light {
   background: colors.$gray-100;
-  color: colors.$text-primary-i;
+  color: colors.$text-primary;
 }
 </style>
