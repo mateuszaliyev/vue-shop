@@ -52,5 +52,9 @@ export default class TheLayout extends Vue {}
   font-size: 1.5rem;
   padding: 2.4rem;
   text-align: center;
+
+  & > a:hover {
+    opacity: 0.6;
+  }
 }
 </style>

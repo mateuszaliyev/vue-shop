@@ -40,6 +40,11 @@ export default class TheButton extends Vue {
   outline: none;
   padding: 0.8rem 1.6rem;
 
+  &:hover {
+    background: colors.$gray-200;
+    color: colors.$text-primary;
+  }
+
   &--default {
     background: colors.$text-primary;
     color: colors.$text-primary-i;
