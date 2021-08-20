@@ -1,6 +1,8 @@
 import { IconDefinition } from "@fortawesome/fontawesome-common-types";
 
 import { faBars } from "@fortawesome/free-solid-svg-icons/faBars";
+import { faCaretDown } from "@fortawesome/free-solid-svg-icons/faCaretDown";
+import { faCaretRight } from "@fortawesome/free-solid-svg-icons/faCaretRight";
 import { faCcAmex } from "@fortawesome/free-brands-svg-icons/faCcAmex";
 import { faCreditCard } from "@fortawesome/free-solid-svg-icons/faCreditCard";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons/faEnvelope";
@@ -13,10 +15,13 @@ import { faPinterestP } from "@fortawesome/free-brands-svg-icons/faPinterestP";
 import { faSearch } from "@fortawesome/free-solid-svg-icons/faSearch";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons/faShoppingCart";
 import { faSnapchat } from "@fortawesome/free-brands-svg-icons/faSnapchat";
+import { faTimes } from "@fortawesome/free-solid-svg-icons/faTimes";
 import { faTwitter } from "@fortawesome/free-brands-svg-icons/faTwitter";
 
 const icons: IconDefinition[] = [
   faBars,
+  faCaretDown,
+  faCaretRight,
   faCcAmex,
   faCreditCard,
   faEnvelope,
@@ -29,6 +34,7 @@ const icons: IconDefinition[] = [
   faSearch,
   faShoppingCart,
   faSnapchat,
+  faTimes,
   faTwitter,
 ];
 

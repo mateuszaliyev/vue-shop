@@ -32,5 +32,6 @@ export default class HeaderMain extends Vue {}
   font-size: inherit;
   font-weight: 400;
   margin-right: auto;
+  text-transform: capitalize;
 }
 </style>

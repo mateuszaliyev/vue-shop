@@ -1,13 +1,23 @@
 <template>
-  <footer class="footer light">
+  <footer class="footer light" id="footer">
     <div class="column">
       <h4 class="heading">Contact</h4>
       <p class="paragraph">Questions? Go ahead</p>
       <form class="form" @submit.prevent="handleSubmit">
-        <the-input class="input" placeholder="Name" v-model="name" />
-        <the-input class="input" placeholder="Email" v-model="email" />
-        <the-input class="input" placeholder="Subject" v-model="subject" />
-        <the-input class="input" placeholder="Message" v-model="message" />
+        <the-input class="input" placeholder="Name" required v-model="name" />
+        <the-input class="input" placeholder="Email" required v-model="email" />
+        <the-input
+          class="input"
+          placeholder="Subject"
+          required
+          v-model="subject"
+        />
+        <the-input
+          class="input"
+          placeholder="Message"
+          required
+          v-model="message"
+        />
         <the-button color="default">Send</the-button>
       </form>
     </div>

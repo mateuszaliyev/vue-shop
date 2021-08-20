@@ -57,6 +57,13 @@ body {
   scroll-behavior: smooth;
 }
 
+#app {
+  display: flex;
+  margin: 0 auto;
+  max-width: breakpoints.breakpoint("xl");
+  min-height: 100vh;
+}
+
 .container {
   @include breakpoints.container;
 }
@@ -69,5 +76,9 @@ body {
 .light {
   background: colors.$gray-100;
   color: colors.$text-primary;
+}
+
+.overflow-hidden {
+  overflow: hidden;
 }
 </style>

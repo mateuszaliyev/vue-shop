@@ -17,7 +17,7 @@ import IconButton from "@/components/input/IconButton.vue";
 })
 export default class TheHeader extends Vue {
   handleClick(): void {
-    console.log("clicked");
+    this.$store.dispatch("toggleSidebar");
   }
 }
 </script>
@@ -30,8 +30,12 @@ export default class TheHeader extends Vue {
   display: flex;
   font-size: 2.4rem;
   justify-content: space-between;
+  left: 0;
   padding-bottom: 2.4rem;
   padding-top: 2.4rem;
+  position: fixed;
+  top: 0;
+  width: 100%;
 
   @include breakpoints.respond-to("lg") {
     display: none;

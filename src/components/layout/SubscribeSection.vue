@@ -1,9 +1,14 @@
 <template>
-  <section class="container dark subscribe">
+  <section class="container dark subscribe" id="subscribe">
     <h1 class="heading">Subscribe</h1>
     <p class="paragraph">To get special offers and VIP treatment:</p>
     <form @submit.prevent="handleSubmit">
-      <the-input class="input" placeholder="Enter e-mail" v-model="email" />
+      <the-input
+        class="input"
+        placeholder="Enter e-mail"
+        required
+        v-model="email"
+      />
       <the-button class="button" color="primary">Subscribe</the-button>
     </form>
   </section>

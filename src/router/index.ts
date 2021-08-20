@@ -6,7 +6,7 @@ Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
   {
-    path: "/",
+    path: "/:category?/:subcategory?",
     name: "Home",
     component: Home,
   },
@@ -22,6 +22,7 @@ const routes: Array<RouteConfig> = [
 ];
 
 const router = new VueRouter({
+  mode: "history",
   routes,
 });
 

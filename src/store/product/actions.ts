@@ -1,8 +1,12 @@
 import { ActionTree } from "vuex";
 
-import { SET_ERROR, SET_ITEMS, SET_LOADING } from "./mutation-types";
 import { Product, ProductState } from "@/store/product/types";
 import { RootState } from "@/store/types";
+import {
+  SET_ERROR,
+  SET_ITEMS,
+  SET_LOADING,
+} from "@/store/product/mutation-types";
 
 const actions: ActionTree<ProductState, RootState> = {
   async fetchProducts({ commit }) {

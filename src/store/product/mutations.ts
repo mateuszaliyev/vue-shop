@@ -1,7 +1,11 @@
 import { MutationTree } from "vuex";
 
 import { ProductState } from "@/store/product/types";
-import { SET_ERROR, SET_ITEMS, SET_LOADING } from "./mutation-types";
+import {
+  SET_ERROR,
+  SET_ITEMS,
+  SET_LOADING,
+} from "@/store/product/mutation-types";
 
 const mutations: MutationTree<ProductState> = {
   [SET_ERROR](state, payload) {

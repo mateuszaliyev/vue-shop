@@ -1,1 +1,3 @@
-export type RootState = Record<string, never>;
+export type RootState = {
+  sidebarVisibility: boolean;
+};

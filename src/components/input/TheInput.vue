@@ -3,6 +3,7 @@
     class="input"
     @input="$emit('input', $event.target.value)"
     :placeholder="placeholder"
+    :required="required"
     type="text"
     :value="value"
   />
@@ -14,6 +15,7 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 @Component
 export default class TheInput extends Vue {
   @Prop() placeholder!: string;
+  @Prop() required!: boolean;
 
   value = "";
 }

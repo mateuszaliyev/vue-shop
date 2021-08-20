@@ -2,8 +2,10 @@
   <!-- Sidebar -->
   <div v-frag>
     <header-mobile />
+    <the-overlay />
+    <the-sidebar />
     <main class="main">
-      <header-main>Jeans</header-main>
+      <header-main>{{ this.$route.params.category }}</header-main>
       <slot></slot>
       <subscribe-section />
       <the-footer />
@@ -20,6 +22,8 @@ import HeaderMain from "@/components/layout/HeaderMain.vue";
 import HeaderMobile from "@/components/layout/HeaderMobile.vue";
 import SubscribeSection from "@/components/layout/SubscribeSection.vue";
 import TheFooter from "@/components/layout/TheFooter.vue";
+import TheOverlay from "@/components/layout/TheOverlay.vue";
+import TheSidebar from "@/components/layout/TheSidebar.vue";
 
 @Component({
   components: {
@@ -27,6 +31,8 @@ import TheFooter from "@/components/layout/TheFooter.vue";
     HeaderMobile,
     SubscribeSection,
     TheFooter,
+    TheOverlay,
+    TheSidebar,
   },
 })
 export default class TheLayout extends Vue {}
@@ -36,9 +42,10 @@ export default class TheLayout extends Vue {}
 @use "../../styles/breakpoints";
 
 .main {
-  @include breakpoints.respond-to("lg") {
-    margin-left: 250px;
-  }
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-height: 100%;
 }
 
 .powered {
