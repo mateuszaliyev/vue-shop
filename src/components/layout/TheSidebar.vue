@@ -1,72 +1,122 @@
 <template>
-  <nav class="nav" :class="classes">
-    <div class="logo">
-      LOGO
-      <icon-button
-        class="close"
-        @click="handleClose"
-        icon="times"
-      ></icon-button>
-    </div>
-    <ul class="categories">
-      <the-sidebar-item href="/shirts" title="Shirts"></the-sidebar-item>
-      <the-sidebar-item href="/dresses" title="Dresses"></the-sidebar-item>
-      <the-sidebar-item title="Jeans">
-        <ul class="subcategories">
-          <the-sidebar-item
-            href="/jeans/skinny"
-            title="Skinny"
-          ></the-sidebar-item>
-          <the-sidebar-item
-            href="/jeans/relaxed"
-            title="Relaxed"
-          ></the-sidebar-item>
-          <the-sidebar-item
-            href="/jeans/bootcut"
-            title="Bootcut"
-          ></the-sidebar-item>
-          <the-sidebar-item
-            href="/jeans/straight"
-            title="Straight"
-          ></the-sidebar-item>
-        </ul>
-      </the-sidebar-item>
-      <the-sidebar-item href="/jackets" title="Jackets"></the-sidebar-item>
-      <the-sidebar-item href="/gymwear" title="Gymwear"></the-sidebar-item>
-      <the-sidebar-item href="/blazers" title="Blazers"></the-sidebar-item>
-      <the-sidebar-item href="/shoes" title="Shoes"></the-sidebar-item>
-    </ul>
-    <ul class="useful">
-      <li class="useful__item">
-        <a class="useful__link" href="#footer">Contact</a>
-      </li>
-      <li class="useful__item">
-        <a class="useful__link" href="javascript:void(0)">Newsletter</a>
-      </li>
-      <li class="useful__item">
-        <a class="useful__link" href="#subscribe">Subscribe</a>
-      </li>
-    </ul>
-  </nav>
+  <div v-frag>
+    <nav class="nav" :class="classes">
+      <div class="logo">
+        LOGO
+        <icon-button
+          class="close"
+          @click="handleClose"
+          icon="times"
+        ></icon-button>
+      </div>
+      <ul class="categories">
+        <the-sidebar-item href="/shirts" title="Shirts"></the-sidebar-item>
+        <the-sidebar-item href="/dresses" title="Dresses"></the-sidebar-item>
+        <the-sidebar-item title="Jeans">
+          <ul class="subcategories">
+            <the-sidebar-item
+              href="/jeans/skinny"
+              title="Skinny"
+            ></the-sidebar-item>
+            <the-sidebar-item
+              href="/jeans/relaxed"
+              title="Relaxed"
+            ></the-sidebar-item>
+            <the-sidebar-item
+              href="/jeans/bootcut"
+              title="Bootcut"
+            ></the-sidebar-item>
+            <the-sidebar-item
+              href="/jeans/straight"
+              title="Straight"
+            ></the-sidebar-item>
+          </ul>
+        </the-sidebar-item>
+        <the-sidebar-item href="/jackets" title="Jackets"></the-sidebar-item>
+        <the-sidebar-item href="/gymwear" title="Gymwear"></the-sidebar-item>
+        <the-sidebar-item href="/blazers" title="Blazers"></the-sidebar-item>
+        <the-sidebar-item href="/shoes" title="Shoes"></the-sidebar-item>
+      </ul>
+      <ul class="useful">
+        <li class="useful__item">
+          <a class="useful__link" href="#footer">Contact</a>
+        </li>
+        <li class="useful__item">
+          <a
+            class="useful__link"
+            @click="handleNewsletterOpen"
+            href="javascript:void(0)"
+            >Newsletter</a
+          >
+        </li>
+        <li class="useful__item">
+          <a class="useful__link" href="#subscribe">Subscribe</a>
+        </li>
+      </ul>
+    </nav>
+    <the-modal
+      @close="handleNewsletterClose"
+      :open="newsletterOpen"
+      title="Newsletter"
+    >
+      <form class="newsletter" @submit.prevent="handleNewsletterSubmit">
+        <p class="newsletter__text">
+          Join our mailing list to receive updates on new arrivals and special
+          offers.
+        </p>
+        <the-input
+          class="newsletter__input"
+          placeholder="Enter e-mail"
+          required
+          type="email"
+          v-model="newsletterEmail"
+        />
+        <the-button class="newsletter__button" color="primary"
+          >Subscribe</the-button
+        >
+      </form>
+    </the-modal>
+  </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue, Watch } from "vue-property-decorator";
 
 import IconButton from "@/components/input/IconButton.vue";
+import TheButton from "@/components/input/TheButton.vue";
+import TheInput from "@/components/input/TheInput.vue";
+import TheModal from "@/components/TheModal.vue";
 import TheSidebarItem from "@/components/layout/TheSidebarItem.vue";
 
 @Component({
   components: {
     IconButton,
+    TheButton,
+    TheInput,
+    TheModal,
     TheSidebarItem,
   },
 })
 export default class TheSidebar extends Vue {
   extended = false;
+  newsletterEmail = "";
+  newsletterOpen = false;
 
   handleClose(): void {
     this.$store.dispatch("toggleSidebar");
+  }
+
+  handleNewsletterClose(): void {
+    this.newsletterOpen = false;
+  }
+
+  handleNewsletterOpen(): void {
+    this.newsletterOpen = true;
+  }
+
+  handleNewsletterSubmit(): void {
+    console.log(this.newsletterEmail);
+    this.newsletterOpen = false;
   }
 
   @Watch("$route")
@@ -145,6 +195,27 @@ export default class TheSidebar extends Vue {
     @include breakpoints.respond-to("lg") {
       position: static;
     }
+  }
+}
+
+.newsletter {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  font-size: 1.5rem;
+  gap: 1.5rem;
+  padding: 1.2rem 0 1.6rem;
+
+  &__button {
+    padding: 1.2rem 2.4rem;
+  }
+
+  &__input {
+    align-self: stretch;
+  }
+
+  &__text {
+    text-align: center;
   }
 }
 
