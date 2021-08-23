@@ -157,10 +157,14 @@ export default class TheSidebar extends Vue {
 
 .close {
   font-size: 1.5rem;
-  margin: 0.8rem 1.6rem;
+  padding: 0.8rem 1.6rem;
   position: absolute;
   right: 0;
   top: 0;
+
+  &:hover {
+    background-color: colors.$gray-200;
+  }
 
   @include breakpoints.respond-to("lg") {
     display: none;

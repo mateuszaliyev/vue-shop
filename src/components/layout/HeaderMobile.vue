@@ -1,7 +1,7 @@
 <template>
-  <header class="container dark header">
+  <header class="dark header">
     <div class="logo">Logo</div>
-    <icon-button @click="handleClick" icon="bars"></icon-button>
+    <icon-button class="button" @click="handleClick" icon="bars"></icon-button>
   </header>
 </template>
 
@@ -26,13 +26,20 @@ export default class TheHeader extends Vue {
 @use "../../styles/breakpoints";
 @use "../../styles/colors";
 
+.button {
+  padding: 2.4rem 1.6rem;
+
+  &:hover {
+    background-color: colors.$gray-200;
+    color: colors.$text-primary;
+  }
+}
+
 .header {
   display: flex;
   font-size: 2.4rem;
   justify-content: space-between;
   left: 0;
-  padding-bottom: 2.4rem;
-  padding-top: 2.4rem;
   position: fixed;
   top: 0;
   width: 100%;
@@ -44,6 +51,7 @@ export default class TheHeader extends Vue {
 
 .logo {
   letter-spacing: 0.162em;
+  padding: 2.4rem 1.6rem;
   text-transform: uppercase;
 }
 </style>
