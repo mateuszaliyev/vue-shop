@@ -2,8 +2,8 @@
   <div class="modal" :class="classes" v-show="open">
     <div class="content">
       <div class="headline">
-        <h2 class="title">{{ title }}</h2>
         <icon-button class="close" @click="handleClose" icon="times" />
+        <h2 class="title">{{ title }}</h2>
       </div>
       <slot></slot>
     </div>
@@ -37,14 +37,12 @@ export default class TheModal extends Vue {
 </script>
 
 <style lang="scss" scoped>
+@use "../styles/breakpoints";
 @use "../styles/colors";
 
 .close {
   font-size: 3.6rem;
   padding: 0.8rem 1.6rem;
-  position: absolute;
-  right: 0;
-  top: 0;
 
   &:hover {
     background-color: colors.$gray-200;
@@ -56,12 +54,27 @@ export default class TheModal extends Vue {
   background-color: colors.$background;
   margin: 0 1rem;
   padding: 3.2rem 4.8rem;
+
+  @include breakpoints.respond-to("sm") {
+    margin: 0 auto;
+    width: 50rem;
+  }
+
+  @include breakpoints.respond-to("md") {
+    width: 60rem;
+  }
+
+  @include breakpoints.respond-to("lg") {
+    width: 90rem;
+  }
 }
 
 .headline {
   align-items: center;
   display: flex;
-  height: 5.8rem;
+  flex-direction: row-reverse;
+  flex-wrap: wrap;
+  min-height: 5.8rem;
   position: relative;
 }
 
@@ -75,17 +88,21 @@ export default class TheModal extends Vue {
   right: 0;
   top: 0;
 
+  @include breakpoints.respond-to("md") {
+    padding-top: 10rem;
+  }
+
   &--open {
     display: block;
   }
 }
 
 .title {
+  flex-grow: 1;
   font-size: 3rem;
   font-weight: 400;
   letter-spacing: 0.135em;
   text-align: center;
   text-transform: uppercase;
-  width: 100%;
 }
 </style>

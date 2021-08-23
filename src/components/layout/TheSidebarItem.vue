@@ -57,7 +57,7 @@ export default class TheSidebarItem extends Vue {
 @use "../../styles/fonts";
 
 .caret-right {
-  margin-right: 1.6rem;
+  margin-right: 1.2rem;
 }
 
 .link {
