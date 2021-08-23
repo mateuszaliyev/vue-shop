@@ -1,18 +1,14 @@
 <template>
   <div class="list">
-    <router-link
-      class="link"
+    <product-list-item
+      :alt="product.productName"
+      :href="productPath(product)"
       :key="product.id"
-      :to="productPath(product)"
+      :price="product.price"
+      :src="product.image"
+      :title="product.productName"
       v-for="product in products"
-    >
-      <product-list-item
-        :alt="product.productName"
-        :price="product.price"
-        :src="product.image"
-        :title="product.productName"
-      />
-    </router-link>
+    />
   </div>
 </template>
 
@@ -41,10 +37,6 @@ export default class ProductList extends Vue {
 
 <style lang="scss" scoped>
 @use "../../styles/breakpoints";
-
-.link {
-  text-decoration: none;
-}
 
 .list {
   column-gap: 3.2rem;
