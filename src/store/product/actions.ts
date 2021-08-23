@@ -1,6 +1,6 @@
 import { ActionTree } from "vuex";
 
-import { Product, ProductState } from "@/store/product/types";
+import { APIProduct, Product, ProductState } from "@/store/product/types";
 import { RootState } from "@/store/types";
 import {
   SET_ERROR,
@@ -22,17 +22,27 @@ const actions: ActionTree<ProductState, RootState> = {
         commit(SET_ERROR, "Couldn't reach the API.");
       }
 
-      const data: Array<Product> = await res.json();
+      const data: Array<APIProduct> = await res.json();
 
       if (!data || !data.length) {
         commit(SET_LOADING, false);
         commit(SET_ERROR, "Received data is empty");
       }
 
+      const items: Array<Product> = data.map((item) => {
+        const { product_name, short_description, ...other } = item;
+
+        return {
+          ...other,
+          productName: product_name,
+          shortDescription: short_description,
+        };
+      });
+
       commit(SET_LOADING, false);
       commit(SET_ERROR, null);
-      commit(SET_ITEMS, data);
-      console.log(data);
+      commit(SET_ITEMS, items);
+      console.log(items);
     } catch (error) {
       console.error(error);
       commit(SET_LOADING, false);

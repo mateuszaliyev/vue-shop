@@ -180,13 +180,16 @@ export default class TheSidebar extends Vue {
 }
 
 .nav {
+  background-color: colors.$background;
   display: none;
+  height: 100%;
   overflow-y: auto;
   width: 25rem;
   z-index: 3;
 
   @include breakpoints.respond-to("lg") {
     display: block;
+    position: fixed;
   }
 
   &--extended {
@@ -198,7 +201,7 @@ export default class TheSidebar extends Vue {
     top: 0;
 
     @include breakpoints.respond-to("lg") {
-      position: static;
+      left: unset;
     }
   }
 }

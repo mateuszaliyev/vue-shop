@@ -2,7 +2,10 @@
   <figure class="jumbotron">
     <img :alt="alt" class="image" :src="src" />
     <div class="content">
-      <figcaption class="title">{{ title }}</figcaption>
+      <figcaption class="caption">
+        <h1 class="title">{{ title }}</h1>
+        <h2 class="subtitle">{{ subtitle }}</h2>
+      </figcaption>
       <router-link :to="href">
         <the-button class="button">Shop Now</the-button>
       </router-link>
@@ -24,11 +27,13 @@ export default class TheJumbotron extends Vue {
   @Prop() alt!: string;
   @Prop() href!: string;
   @Prop() src!: string;
+  @Prop() subtitle!: string;
   @Prop() title!: string;
 }
 </script>
 
 <style lang="scss" scoped>
+@use "../styles/breakpoints";
 @use "../styles/colors";
 
 .button {
@@ -36,6 +41,14 @@ export default class TheJumbotron extends Vue {
   margin: 0.5rem 0 0;
   padding: 1.2rem 2.4rem;
   text-transform: uppercase;
+}
+
+.caption {
+  color: colors.$text-primary-i;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 1rem 0;
 }
 
 .content {
@@ -54,9 +67,23 @@ export default class TheJumbotron extends Vue {
   width: 100%;
 }
 
-.title {
-  color: colors.$text-primary-i;
+.subtitle {
+  display: none;
+  font-weight: 400;
   font-size: 3.6rem;
-  margin: 1rem 0;
+  text-transform: uppercase;
+
+  @include breakpoints.respond-to("sm") {
+    display: block;
+  }
+}
+
+.title {
+  font-size: 3.6rem;
+  font-weight: 400;
+
+  @include breakpoints.respond-to("sm") {
+    font-size: 6.4rem;
+  }
 }
 </style>

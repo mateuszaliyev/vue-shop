@@ -8,6 +8,10 @@ const getters: GetterTree<ProductState, RootState> = {
     return state.error;
   },
 
+  getItemCount(state) {
+    return state.items.length;
+  },
+
   getItems(state) {
     return state.items;
   },

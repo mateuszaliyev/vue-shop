@@ -49,6 +49,7 @@ export default class TheLayout extends Vue {}
   min-height: 100%;
 
   @include breakpoints.respond-to("lg") {
+    margin-left: 25rem;
     margin-top: 0;
   }
 }
