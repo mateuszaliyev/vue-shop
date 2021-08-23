@@ -87,6 +87,7 @@ export default class TheModal extends Vue {
   position: fixed;
   right: 0;
   top: 0;
+  z-index: 4;
 
   @include breakpoints.respond-to("md") {
     padding-top: 10rem;

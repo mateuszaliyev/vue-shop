@@ -48,6 +48,7 @@ export default class TheOverlay extends Vue {
   position: fixed;
   right: 0;
   top: 0;
+  z-index: 2;
 
   &--visible {
     display: block;

@@ -45,7 +45,12 @@ export default class TheLayout extends Vue {}
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  margin-top: 8.3rem;
   min-height: 100%;
+
+  @include breakpoints.respond-to("lg") {
+    margin-top: 0;
+  }
 }
 
 .powered {

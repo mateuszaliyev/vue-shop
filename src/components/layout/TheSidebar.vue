@@ -183,6 +183,7 @@ export default class TheSidebar extends Vue {
   display: none;
   overflow-y: auto;
   width: 25rem;
+  z-index: 3;
 
   @include breakpoints.respond-to("lg") {
     display: block;

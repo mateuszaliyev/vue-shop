@@ -27,6 +27,11 @@ body {
   font-size: 1.6rem;
   line-height: 1.5;
   scroll-behavior: smooth;
+  scroll-padding-top: 8.4rem;
+
+  @include breakpoints.respond-to("lg") {
+    scroll-padding-top: 0rem;
+  }
 }
 
 #app {

@@ -19,7 +19,7 @@ export default class TheButton extends Vue {
 
   get classes(): { [key: string]: boolean } {
     return {
-      [`button--${this.color}`]: true,
+      [this.color ? `button--${this.color}` : "button--default"]: true,
     };
   }
 }

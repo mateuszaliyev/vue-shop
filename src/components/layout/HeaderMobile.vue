@@ -43,6 +43,7 @@ export default class TheHeader extends Vue {
   position: fixed;
   top: 0;
   width: 100%;
+  z-index: 1;
 
   @include breakpoints.respond-to("lg") {
     display: none;

@@ -18,7 +18,7 @@
           required
           v-model="message"
         />
-        <the-button color="default">Send</the-button>
+        <the-button>Send</the-button>
       </form>
     </div>
     <div class="column">

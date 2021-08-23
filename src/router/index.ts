@@ -24,6 +24,13 @@ const routes: Array<RouteConfig> = [
 const router = new VueRouter({
   mode: "history",
   routes,
+  scrollBehavior: (to) => {
+    if (to.hash) {
+      return {
+        selector: to.hash,
+      };
+    }
+  },
 });
 
 export default router;
