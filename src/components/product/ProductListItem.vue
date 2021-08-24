@@ -1,19 +1,21 @@
 <template>
   <figure class="item">
     <div class="image__container">
-      <img :alt="alt" class="image" :src="src" />
-      <span class="dark tag" v-if="tag">{{ tag }}</span>
       <router-link class="link" :to="href">
-        <the-button class="button">
-          Buy now <font-awesome-icon icon="shopping-cart" />
-        </the-button>
+        <img :alt="alt" class="image" :src="src" />
       </router-link>
+      <span class="dark tag" v-if="tag">{{ tag }}</span>
+      <the-button class="button" @click="handleClick" v-show="button">
+        Buy now <font-awesome-icon icon="shopping-cart" />
+      </the-button>
     </div>
-    <figcaption class="caption">
-      {{ title }}
-      <br />
-      <strong :class="priceClasses">{{ price }}</strong>
-    </figcaption>
+    <router-link class="link" :to="href">
+      <figcaption class="caption">
+        {{ title }}
+        <br />
+        <strong :class="priceClasses">{{ price }}</strong>
+      </figcaption>
+    </router-link>
   </figure>
 </template>
 
@@ -29,11 +31,16 @@ import TheButton from "@/components/input/TheButton.vue";
 })
 export default class ProductListItem extends Vue {
   @Prop() alt!: string;
+  @Prop(Boolean) button!: boolean;
   @Prop() href!: string;
   @Prop() price!: string;
   @Prop() src!: string;
   @Prop() tag!: string;
   @Prop() title!: string;
+
+  handleClick(): void {
+    this.$emit("buttonClick");
+  }
 
   get priceClasses(): { [key: string]: boolean } {
     return {
@@ -48,8 +55,17 @@ export default class ProductListItem extends Vue {
 @use "../../styles/colors";
 
 .button {
+  display: none;
   font-size: 1.5rem;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
   white-space: nowrap;
+
+  &:hover {
+    display: block;
+  }
 }
 
 .caption {
@@ -62,12 +78,12 @@ export default class ProductListItem extends Vue {
   vertical-align: middle;
   width: 100%;
 
-  &:hover + .link {
-    display: block;
-  }
-
   &__container {
     position: relative;
+
+    &:hover .button {
+      display: block;
+    }
   }
 }
 
@@ -76,15 +92,7 @@ export default class ProductListItem extends Vue {
 }
 
 .link {
-  display: none;
-  left: 50%;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
-
-  &:hover {
-    display: block;
-  }
+  text-decoration: none;
 }
 
 .price {

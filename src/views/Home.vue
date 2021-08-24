@@ -1,5 +1,6 @@
 <template>
   <div v-frag>
+    <the-header cart search>{{ this.$route.params.category }}</the-header>
     <section class="container">
       <the-jumbotron
         alt="Jeans"
@@ -24,17 +25,19 @@
 import { Component, Vue } from "vue-property-decorator";
 
 import ProductList from "@/components/product/ProductList.vue";
+import TheHeader from "@/components/TheHeader.vue";
 import TheJumbotron from "@/components/TheJumbotron.vue";
 
 @Component({
   components: {
+    TheHeader,
     ProductList,
     TheJumbotron,
   },
 })
 export default class Home extends Vue {
   get itemCount(): number {
-    return this.$store.getters.getItemCount;
+    return this.$store.getters.getProductItemCount;
   }
 }
 </script>

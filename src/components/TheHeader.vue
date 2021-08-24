@@ -1,13 +1,15 @@
 <template>
   <header class="container header">
     <h1 class="heading"><slot></slot></h1>
-    <icon-button icon="shopping-cart"></icon-button>
-    <icon-button icon="search"></icon-button>
+    <router-link to="/cart" v-if="cart">
+      <icon-button icon="shopping-cart"></icon-button>
+    </router-link>
+    <icon-button icon="search" v-if="search"></icon-button>
   </header>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Prop, Vue } from "vue-property-decorator";
 
 import IconButton from "@/components/input/IconButton.vue";
 
@@ -16,7 +18,10 @@ import IconButton from "@/components/input/IconButton.vue";
     IconButton,
   },
 })
-export default class HeaderMain extends Vue {}
+export default class TheHeader extends Vue {
+  @Prop(Boolean) cart!: boolean;
+  @Prop(Boolean) search!: boolean;
+}
 </script>
 
 <style lang="scss" scoped>

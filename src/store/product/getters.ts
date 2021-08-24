@@ -4,20 +4,20 @@ import { RootState } from "@/store/types";
 import { ProductState } from "@/store/product/types";
 
 const getters: GetterTree<ProductState, RootState> = {
-  getError(state) {
-    return state.error;
+  getProductError(state) {
+    return state.productError;
   },
 
-  getItemCount(state) {
-    return state.items.length;
+  getProductItemCount(state) {
+    return state.productItems.length;
   },
 
-  getItems(state) {
-    return state.items;
+  getProductItems(state) {
+    return state.productItems;
   },
 
-  getLoading(state) {
-    return state.loading;
+  getProductLoading(state) {
+    return state.productLoading;
   },
 };
 

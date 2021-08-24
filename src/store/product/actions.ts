@@ -3,14 +3,14 @@ import { ActionTree } from "vuex";
 import { APIProduct, Product, ProductState } from "@/store/product/types";
 import { RootState } from "@/store/types";
 import {
-  SET_ERROR,
-  SET_ITEMS,
-  SET_LOADING,
+  SET_PRODUCT_ERROR,
+  SET_PRODUCT_ITEMS,
+  SET_PRODUCT_LOADING,
 } from "@/store/product/mutation-types";
 
 const actions: ActionTree<ProductState, RootState> = {
   async fetchProducts({ commit }) {
-    commit(SET_LOADING, true);
+    commit(SET_PRODUCT_LOADING, true);
 
     try {
       const res = await fetch(
@@ -18,15 +18,15 @@ const actions: ActionTree<ProductState, RootState> = {
       );
 
       if (!res.ok) {
-        commit(SET_LOADING, false);
-        commit(SET_ERROR, "Couldn't reach the API.");
+        commit(SET_PRODUCT_LOADING, false);
+        commit(SET_PRODUCT_ERROR, "Couldn't reach the API.");
       }
 
       const data: Array<APIProduct> = await res.json();
 
       if (!data || !data.length) {
-        commit(SET_LOADING, false);
-        commit(SET_ERROR, "Received data is empty");
+        commit(SET_PRODUCT_LOADING, false);
+        commit(SET_PRODUCT_ERROR, "Received data is empty");
       }
 
       const items: Array<Product> = data.map((item) => {
@@ -39,14 +39,13 @@ const actions: ActionTree<ProductState, RootState> = {
         };
       });
 
-      commit(SET_LOADING, false);
-      commit(SET_ERROR, null);
-      commit(SET_ITEMS, items);
-      console.log(items);
+      commit(SET_PRODUCT_LOADING, false);
+      commit(SET_PRODUCT_ERROR, null);
+      commit(SET_PRODUCT_ITEMS, items);
     } catch (error) {
       console.error(error);
-      commit(SET_LOADING, false);
-      commit(SET_ERROR, "Internal Server Error");
+      commit(SET_PRODUCT_LOADING, false);
+      commit(SET_PRODUCT_ERROR, "Internal Server Error");
     }
   },
 };

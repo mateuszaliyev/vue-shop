@@ -15,6 +15,7 @@ import { faPinterestP } from "@fortawesome/free-brands-svg-icons/faPinterestP";
 import { faSearch } from "@fortawesome/free-solid-svg-icons/faSearch";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons/faShoppingCart";
 import { faSnapchat } from "@fortawesome/free-brands-svg-icons/faSnapchat";
+import { faTrash } from "@fortawesome/free-solid-svg-icons/faTrash";
 import { faTimes } from "@fortawesome/free-solid-svg-icons/faTimes";
 import { faTwitter } from "@fortawesome/free-brands-svg-icons/faTwitter";
 
@@ -34,6 +35,7 @@ const icons: IconDefinition[] = [
   faSearch,
   faShoppingCart,
   faSnapchat,
+  faTrash,
   faTimes,
   faTwitter,
 ];

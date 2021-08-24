@@ -20,6 +20,7 @@ import TheLayout from "@/components/layout/TheLayout.vue";
 })
 export default class App extends Vue {
   mounted(): void {
+    this.$store.dispatch("fetchCart");
     this.$store.dispatch("fetchProducts");
   }
 }

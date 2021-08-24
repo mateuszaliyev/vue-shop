@@ -2,6 +2,8 @@
   <div class="list">
     <product-list-item
       :alt="product.productName"
+      :button="!isProductInACart(product)"
+      @buttonClick="addProductToACart(product)"
       :href="productPath(product)"
       :key="product.id"
       :price="product.price"
@@ -17,6 +19,7 @@ import { Component, Vue } from "vue-property-decorator";
 
 import ProductListItem from "@/components/product/ProductListItem.vue";
 
+import { CartItem } from "@/store/cart/types";
 import { Product } from "@/store/product/types";
 
 @Component({
@@ -25,12 +28,24 @@ import { Product } from "@/store/product/types";
   },
 })
 export default class ProductList extends Vue {
+  addProductToACart(product: Product): void {
+    this.$store.dispatch("addProductToACart", product);
+  }
+
+  isProductInACart(product: Product): boolean {
+    return this.cart.some((item) => item.id === product.id);
+  }
+
   productPath(product: Product): string {
     return `/products/${product.id}`;
   }
 
+  get cart(): CartItem[] {
+    return this.$store.getters.getCartItems;
+  }
+
   get products(): Product[] {
-    return this.$store.getters.getItems;
+    return this.$store.getters.getProductItems;
   }
 }
 </script>

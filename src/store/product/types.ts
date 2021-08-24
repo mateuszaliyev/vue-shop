@@ -14,7 +14,7 @@ export type Product = Omit<APIProduct, "product_name" | "short_description"> & {
 };
 
 export interface ProductState {
-  error: string | null;
-  items: Array<Product>;
-  loading: boolean;
+  productError: string | null;
+  productItems: Array<Product>;
+  productLoading: boolean;
 }

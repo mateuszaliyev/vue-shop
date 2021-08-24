@@ -5,7 +5,6 @@
     <the-overlay />
     <the-sidebar />
     <main class="main">
-      <header-main>{{ this.$route.params.category }}</header-main>
       <slot></slot>
       <subscribe-section />
       <the-footer />
@@ -18,7 +17,6 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import HeaderMain from "@/components/layout/HeaderMain.vue";
 import HeaderMobile from "@/components/layout/HeaderMobile.vue";
 import SubscribeSection from "@/components/layout/SubscribeSection.vue";
 import TheFooter from "@/components/layout/TheFooter.vue";
@@ -27,7 +25,6 @@ import TheSidebar from "@/components/layout/TheSidebar.vue";
 
 @Component({
   components: {
-    HeaderMain,
     HeaderMobile,
     SubscribeSection,
     TheFooter,

@@ -2,20 +2,20 @@ import { MutationTree } from "vuex";
 
 import { ProductState } from "@/store/product/types";
 import {
-  SET_ERROR,
-  SET_ITEMS,
-  SET_LOADING,
+  SET_PRODUCT_ERROR,
+  SET_PRODUCT_ITEMS,
+  SET_PRODUCT_LOADING,
 } from "@/store/product/mutation-types";
 
 const mutations: MutationTree<ProductState> = {
-  [SET_ERROR](state, payload) {
-    state.error = payload;
+  [SET_PRODUCT_ERROR](state, payload) {
+    state.productError = payload;
   },
-  [SET_ITEMS](state, payload) {
-    state.items = payload;
+  [SET_PRODUCT_ITEMS](state, payload) {
+    state.productItems = payload;
   },
-  [SET_LOADING](state, payload) {
-    state.loading = payload;
+  [SET_PRODUCT_LOADING](state, payload) {
+    state.productLoading = payload;
   },
 };
 

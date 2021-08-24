@@ -8,9 +8,9 @@ import mutations from "@/store/product/mutations";
 import { ProductState } from "@/store/product/types";
 
 const state: ProductState = {
-  error: null,
-  items: [],
-  loading: false,
+  productError: null,
+  productItems: [],
+  productLoading: false,
 };
 
 const product: Module<ProductState, RootState> = {
