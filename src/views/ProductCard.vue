@@ -4,13 +4,13 @@
       <the-header cart search>{{ product.company }}</the-header>
       <section class="container product">
         <h1 class="title--mobile">{{ product.productName }}</h1>
-        <p class="price--mobile">{{ product.price }}</p>
+        <p class="price--mobile">{{ price }}</p>
         <div class="image__container">
           <img :alt="product.productName" class="image" :src="product.image" />
         </div>
         <div class="details">
           <h1 class="title--desktop">{{ product.productName }}</h1>
-          <p class="price--desktop">{{ product.price }}</p>
+          <p class="price--desktop">{{ price }}</p>
           <div class="quantity">
             <label :for="`q-${product.id}`">Quantity:</label>
             <the-input :max="100" :min="1" type="number" v-model="quantity" />
@@ -53,6 +53,15 @@ export default class ProductCard extends Vue {
 
   get loading(): boolean {
     return this.$store.getters.getProductLoading;
+  }
+
+  get price(): string {
+    if (this.product) {
+      return `$${(
+        parseFloat(this.product.price.slice(1)) * this.quantity
+      ).toFixed(2)}`;
+    }
+    return `${(0).toFixed(2)}`;
   }
 
   get product(): Product | null {
