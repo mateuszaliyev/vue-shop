@@ -37,6 +37,10 @@ export default class TheHeader extends Vue {
   font-size: inherit;
   font-weight: 400;
   margin-right: auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
   text-transform: capitalize;
+  white-space: nowrap;
+  max-width: calc(70vw - 3.2rem);
 }
 </style>

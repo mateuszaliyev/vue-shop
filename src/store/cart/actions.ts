@@ -7,13 +7,18 @@ import { SET_CART_ITEMS } from "@/store/cart/mutation-types";
 import { Product } from "@/store/product/types";
 
 const actions: ActionTree<CartState, RootState> = {
-  addProductToACart({ commit, dispatch, state }, payload: Product) {
-    const existingItem = state.cartItems.find((item) => item.id === payload.id);
+  addProductToACart(
+    { commit, dispatch, state },
+    payload: { product: Product; quantity?: number }
+  ) {
+    const existingItem = state.cartItems.find(
+      (item) => item.id === payload.product.id
+    );
 
     if (existingItem) {
       const newCart: CartItem[] = state.cartItems.map((item) => ({
         ...item,
-        quantity: item.quantity + 1,
+        quantity: item.quantity + (payload.quantity ?? 1),
       }));
 
       commit(SET_CART_ITEMS, newCart);
@@ -21,7 +26,7 @@ const actions: ActionTree<CartState, RootState> = {
     } else {
       const newCart: CartItem[] = [
         ...state.cartItems,
-        { ...payload, quantity: 1 },
+        { ...payload.product, quantity: payload.quantity ?? 1 },
       ];
 
       commit(SET_CART_ITEMS, newCart);

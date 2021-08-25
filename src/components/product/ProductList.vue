@@ -29,7 +29,7 @@ import { Product } from "@/store/product/types";
 })
 export default class ProductList extends Vue {
   addProductToACart(product: Product): void {
-    this.$store.dispatch("addProductToACart", product);
+    this.$store.dispatch("addProductToACart", { product });
   }
 
   isProductInACart(product: Product): boolean {
