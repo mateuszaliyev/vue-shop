@@ -16,10 +16,16 @@ const actions: ActionTree<CartState, RootState> = {
     );
 
     if (existingItem) {
-      const newCart: CartItem[] = state.cartItems.map((item) => ({
-        ...item,
-        quantity: item.quantity + (payload.quantity ?? 1),
-      }));
+      const newCart: CartItem[] = state.cartItems.map((item) => {
+        if (existingItem.id === item.id) {
+          return {
+            ...item,
+            quantity: item.quantity + (payload.quantity ?? 1),
+          };
+        }
+
+        return item;
+      });
 
       commit(SET_CART_ITEMS, newCart);
       dispatch("storeCart");
