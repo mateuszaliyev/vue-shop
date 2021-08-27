@@ -42,6 +42,7 @@ export default class TheModal extends Vue {
 <style lang="scss" scoped>
 @use "../styles/breakpoints";
 @use "../styles/colors";
+@use "../styles/z";
 
 .close {
   font-size: 3.6rem;
@@ -90,7 +91,8 @@ export default class TheModal extends Vue {
   position: fixed;
   right: 0;
   top: 0;
-  z-index: 4;
+
+  @include z.index(modal);
 
   @include breakpoints.respond-to("md") {
     padding-top: 10rem;

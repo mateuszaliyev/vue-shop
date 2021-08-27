@@ -1,0 +1,15 @@
+$i: (
+  modal: 5,
+  sidebar: 4,
+  overlay: 3,
+  header: 2,
+  foreground: 1,
+) !default;
+
+@mixin index($type) {
+  @if map-has-key($i, $type) {
+    z-index: map-get($i, $type);
+  } @else {
+    @warn "#{$type} is not defined in `$i` map.";
+  }
+}

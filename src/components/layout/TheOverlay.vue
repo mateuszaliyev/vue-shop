@@ -38,6 +38,7 @@ export default class TheOverlay extends Vue {
 
 <style lang="scss" scoped>
 @use "../../styles/breakpoints";
+@use "../../styles/z";
 
 .overlay {
   bottom: 0;
@@ -48,7 +49,8 @@ export default class TheOverlay extends Vue {
   position: fixed;
   right: 0;
   top: 0;
-  z-index: 2;
+
+  @include z.index(overlay);
 
   &--visible {
     display: block;

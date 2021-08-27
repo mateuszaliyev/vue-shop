@@ -145,6 +145,7 @@ export default class TheSidebar extends Vue {
 @use "../../styles/breakpoints";
 @use "../../styles/colors";
 @use "../../styles/fonts";
+@use "../../styles/z";
 
 .categories {
   color: colors.$gray-600;
@@ -185,7 +186,8 @@ export default class TheSidebar extends Vue {
   height: 100%;
   overflow-y: auto;
   width: 25rem;
-  z-index: 3;
+
+  @include z.index(sidebar);
 
   @include breakpoints.respond-to("lg") {
     display: block;

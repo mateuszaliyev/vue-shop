@@ -25,6 +25,7 @@ export default class TheHeader extends Vue {
 <style lang="scss" scoped>
 @use "../../styles/breakpoints";
 @use "../../styles/colors";
+@use "../../styles/z";
 
 .button {
   padding: 2.4rem 1.6rem;
@@ -43,7 +44,8 @@ export default class TheHeader extends Vue {
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 1;
+
+  @include z.index(header);
 
   @include breakpoints.respond-to("lg") {
     display: none;

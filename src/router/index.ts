@@ -10,16 +10,16 @@ const routes: RouteConfig[] = [
     component: () => import(/* webpackChunkName: "cart" */ "../views/Cart.vue"),
   },
   {
-    path: "/search/:query?",
-    name: "Search",
-    component: () =>
-      import(/* webpackChunkName: "search" */ "../views/Search.vue"),
-  },
-  {
     path: "/products/:id",
     name: "ProductCard",
     component: () =>
       import(/* webpackChunkName: "product" */ "../views/ProductCard.vue"),
+  },
+  {
+    path: "/search/:query?",
+    name: "Search",
+    component: () =>
+      import(/* webpackChunkName: "search" */ "../views/Search.vue"),
   },
   {
     path: "/:category?/:subcategory?",
