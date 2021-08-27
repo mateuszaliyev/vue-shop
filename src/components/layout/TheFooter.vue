@@ -2,7 +2,7 @@
   <footer class="footer light" id="footer">
     <div class="column">
       <h4 class="heading">Contact</h4>
-      <p class="paragraph">Questions? Go ahead</p>
+      <p class="paragraph">Questions? Go ahead.</p>
       <form class="form" @submit.prevent="handleSubmit">
         <the-input class="input" placeholder="Name" required v-model="name" />
         <the-input class="input" placeholder="Email" required v-model="email" />

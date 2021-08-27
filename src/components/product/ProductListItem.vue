@@ -71,6 +71,7 @@ export default class ProductListItem extends Vue {
 .caption {
   font-size: 1.5rem;
   margin: 1.5rem 0;
+  overflow-wrap: break-word;
 }
 
 .image {
