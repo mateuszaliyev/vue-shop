@@ -23,6 +23,7 @@ import IconButton from "@/components/input/IconButton.vue";
 export default class TheModal extends Vue {
   @Prop({ default: false, required: false, type: Boolean })
   protected readonly open!: boolean;
+
   @Prop({ default: "", required: true, type: String })
   protected readonly title!: string;
 

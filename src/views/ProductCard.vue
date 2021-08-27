@@ -41,9 +41,9 @@ import { Product } from "@/store/product/types";
   },
 })
 export default class ProductCard extends Vue {
-  quantity = 1;
+  protected quantity = 1;
 
-  addProductToACart(): void {
+  protected addProductToACart(): void {
     this.$store.dispatch("addProductToACart", {
       product: this.product,
       quantity: this.quantity,
@@ -51,11 +51,11 @@ export default class ProductCard extends Vue {
     this.$router.back();
   }
 
-  get loading(): boolean {
+  protected get loading(): boolean {
     return this.$store.getters.getProductLoading;
   }
 
-  get price(): string {
+  protected get price(): string {
     if (this.product) {
       return `$${(
         parseFloat(this.product.price.slice(1)) * this.quantity
@@ -64,7 +64,7 @@ export default class ProductCard extends Vue {
     return `${(0).toFixed(2)}`;
   }
 
-  get product(): Product | null {
+  protected get product(): Product | null {
     return (
       this.products.find(
         (item) => item.id === parseInt(this.$route.params.id)
@@ -72,7 +72,7 @@ export default class ProductCard extends Vue {
     );
   }
 
-  get products(): Product[] {
+  protected get products(): Product[] {
     return this.$store.getters.getProductItems;
   }
 }

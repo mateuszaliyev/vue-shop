@@ -15,6 +15,16 @@ export type Product = Omit<APIProduct, "product_name" | "short_description"> & {
 
 export interface ProductState {
   productError: string | null;
-  productItems: Array<Product>;
+  productItems: Product[];
   productLoading: boolean;
 }
+
+export const productDefault: Product = {
+  company: "",
+  description: "",
+  id: 0,
+  image: "",
+  price: "$0.00",
+  productName: "",
+  shortDescription: "",
+};

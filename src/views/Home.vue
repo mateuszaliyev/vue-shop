@@ -15,7 +15,7 @@
         <p class="count">{{ itemCount }} items</p>
       </section>
       <section class="container">
-        <product-list />
+        <product-list :products="products" />
       </section>
     </template>
   </div>
@@ -28,6 +28,8 @@ import ProductList from "@/components/product/ProductList.vue";
 import TheHeader from "@/components/TheHeader.vue";
 import TheJumbotron from "@/components/TheJumbotron.vue";
 
+import { Product } from "@/store/product/types";
+
 @Component({
   components: {
     TheHeader,
@@ -36,8 +38,12 @@ import TheJumbotron from "@/components/TheJumbotron.vue";
   },
 })
 export default class Home extends Vue {
-  get itemCount(): number {
+  protected get itemCount(): number {
     return this.$store.getters.getProductItemCount;
+  }
+
+  protected get products(): Product[] {
+    return this.$store.getters.getProductItems;
   }
 }
 </script>

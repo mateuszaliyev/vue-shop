@@ -20,13 +20,18 @@ type InputType = "number" | "text";
 export default class TheInput extends Vue {
   @Prop({ default: 0, required: false, type: Number })
   protected readonly max!: number;
+
   @Prop({ default: 0, required: false, type: Number })
   protected readonly min!: number;
+
   @Prop({ default: "", required: false, type: String })
   protected readonly placeholder!: string;
+
   @Prop({ default: false, required: false, type: Boolean })
   protected readonly required!: boolean;
-  @Prop({ default: "text", required: false, type: String }) type!: InputType;
+
+  @Prop({ default: "text", required: false, type: String })
+  protected readonly type!: InputType;
 
   protected value = "";
 

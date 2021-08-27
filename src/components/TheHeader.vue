@@ -4,7 +4,9 @@
     <router-link to="/cart" v-if="cart">
       <icon-button icon="shopping-cart"></icon-button>
     </router-link>
-    <icon-button icon="search" v-if="search"></icon-button>
+    <router-link to="/search" v-if="search">
+      <icon-button icon="search"></icon-button>
+    </router-link>
   </header>
 </template>
 

@@ -3,11 +3,17 @@ import VueRouter, { RouteConfig } from "vue-router";
 
 Vue.use(VueRouter);
 
-const routes: Array<RouteConfig> = [
+const routes: RouteConfig[] = [
   {
     path: "/cart",
     name: "Cart",
     component: () => import(/* webpackChunkName: "cart" */ "../views/Cart.vue"),
+  },
+  {
+    path: "/search/:query?",
+    name: "Search",
+    component: () =>
+      import(/* webpackChunkName: "search" */ "../views/Search.vue"),
   },
   {
     path: "/products/:id",

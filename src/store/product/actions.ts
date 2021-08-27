@@ -22,14 +22,14 @@ const actions: ActionTree<ProductState, RootState> = {
         commit(SET_PRODUCT_ERROR, "Couldn't reach the API.");
       }
 
-      const data: Array<APIProduct> = await res.json();
+      const data: APIProduct[] = await res.json();
 
       if (!data || !data.length) {
         commit(SET_PRODUCT_LOADING, false);
         commit(SET_PRODUCT_ERROR, "Received data is empty");
       }
 
-      const items: Array<Product> = data.map((item) => {
+      const items: Product[] = data.map((item) => {
         const { product_name, short_description, ...other } = item;
 
         return {
