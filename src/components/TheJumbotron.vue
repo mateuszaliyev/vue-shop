@@ -24,11 +24,16 @@ import TheButton from "@/components/input/TheButton.vue";
   },
 })
 export default class TheJumbotron extends Vue {
-  @Prop() alt!: string;
-  @Prop() href!: string;
-  @Prop() src!: string;
-  @Prop() subtitle!: string;
-  @Prop() title!: string;
+  @Prop({ default: "", required: false, type: String })
+  protected readonly alt!: string;
+  @Prop({ default: "", required: true, type: String })
+  protected readonly href!: string;
+  @Prop({ default: "", required: true, type: String })
+  protected readonly src!: string;
+  @Prop({ default: "", required: true, type: String })
+  protected readonly subtitle!: string;
+  @Prop({ default: "", required: true, type: String })
+  protected readonly title!: string;
 }
 </script>
 

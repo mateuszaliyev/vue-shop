@@ -7,10 +7,10 @@ import { Component, Vue, Watch } from "vue-property-decorator";
 
 @Component
 export default class TheOverlay extends Vue {
-  visible = this.$store.getters.getSidebarVisibility;
+  protected visible: boolean = this.$store.getters.getSidebarVisibility;
 
   @Watch("sidebarVisibility", { immediate: true })
-  onSidebarVisibilityChange(value: boolean): void {
+  protected onSidebarVisibilityChange(value: boolean): void {
     this.visible = value;
 
     if (this.visible) {
@@ -20,17 +20,17 @@ export default class TheOverlay extends Vue {
     }
   }
 
-  handleClick(): void {
+  protected handleClick(): void {
     this.$store.dispatch("toggleSidebar");
   }
 
-  get classes(): { [key: string]: boolean } {
+  protected get classes(): { [key: string]: boolean } {
     return {
       "overlay--visible": this.visible,
     };
   }
 
-  get sidebarVisibility(): boolean {
+  protected get sidebarVisibility(): boolean {
     return this.$store.getters.getSidebarVisibility;
   }
 }

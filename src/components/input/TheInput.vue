@@ -14,24 +14,29 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 
+type InputType = "number" | "text";
+
 @Component
 export default class TheInput extends Vue {
-  @Prop() max!: number;
-  @Prop() min!: number;
-  @Prop() placeholder!: string;
-  @Prop() required!: boolean;
-  @Prop({ default: "text" }) type!: "number" | "text";
+  @Prop({ default: 0, required: false, type: Number })
+  protected readonly max!: number;
+  @Prop({ default: 0, required: false, type: Number })
+  protected readonly min!: number;
+  @Prop({ default: "", required: false, type: String })
+  protected readonly placeholder!: string;
+  @Prop({ default: false, required: false, type: Boolean })
+  protected readonly required!: boolean;
+  @Prop({ default: "text", required: false, type: String }) type!: InputType;
 
-  value = "";
+  protected value = "";
 
-  handleInput(event: Event): void {
-    const target = event.target as HTMLInputElement;
+  protected handleInput(event: Event): void {
+    const target: HTMLInputElement = event.target as HTMLInputElement;
 
     if (this.type === "number") {
-      let value = parseFloat(target.value);
+      let value: number = parseFloat(target.value);
 
       if (!target.validity.valid) {
-        console.log("hi");
         value = this.min;
         target.value = `${value}`;
       }

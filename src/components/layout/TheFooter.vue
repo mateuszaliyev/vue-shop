@@ -96,12 +96,12 @@ import TheInput from "@/components/input/TheInput.vue";
   },
 })
 export default class TheFooter extends Vue {
-  email = "";
-  message = "";
-  name = "";
-  subject = "";
+  protected email = "";
+  protected message = "";
+  protected name = "";
+  protected subject = "";
 
-  handleSubmit(): void {
+  protected handleSubmit(): void {
     console.log(this.name, this.email, this.subject, this.message);
   }
 }

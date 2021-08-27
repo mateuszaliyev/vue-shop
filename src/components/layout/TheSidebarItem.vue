@@ -20,31 +20,33 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component
 export default class TheSidebarItem extends Vue {
-  @Prop() href!: string;
-  @Prop() title!: string;
+  @Prop({ default: "", required: false, type: String })
+  protected readonly href!: string;
+  @Prop({ default: "", required: true, type: String })
+  protected readonly title!: string;
 
-  open = false;
+  protected open = false;
 
-  handleClick(): void {
+  protected handleClick(): void {
     this.open = !this.open;
   }
 
-  get classes(): { [key: string]: boolean } {
+  protected get classes(): { [key: string]: boolean } {
     return {
       "link--category": this.currentCategory,
       "link--subcategory": this.currentSubcategory,
     };
   }
 
-  get currentCategory(): boolean {
+  protected get currentCategory(): boolean {
     return this.$route.params.category === this.title.toLowerCase();
   }
 
-  get currentSubcategory(): boolean {
+  protected get currentSubcategory(): boolean {
     return this.$route.params.subcategory === this.title.toLowerCase();
   }
 
-  mounted(): void {
+  protected mounted(): void {
     if (this.currentCategory || this.currentSubcategory) {
       this.open = true;
     }

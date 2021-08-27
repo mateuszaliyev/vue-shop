@@ -28,23 +28,23 @@ import { Product } from "@/store/product/types";
   },
 })
 export default class ProductList extends Vue {
-  addProductToACart(product: Product): void {
+  protected addProductToACart(product: Product): void {
     this.$store.dispatch("addProductToACart", { product });
   }
 
-  isProductInACart(product: Product): boolean {
+  protected isProductInACart(product: Product): boolean {
     return this.cart.some((item) => item.id === product.id);
   }
 
-  productPath(product: Product): string {
+  protected productPath(product: Product): string {
     return `/products/${product.id}`;
   }
 
-  get cart(): CartItem[] {
+  protected get cart(): CartItem[] {
     return this.$store.getters.getCartItems;
   }
 
-  get products(): Product[] {
+  protected get products(): Product[] {
     return this.$store.getters.getProductItems;
   }
 }

@@ -27,9 +27,9 @@ import TheInput from "@/components/input/TheInput.vue";
   },
 })
 export default class SubscribeSection extends Vue {
-  email = "";
+  protected email = "";
 
-  handleSubmit(): void {
+  protected handleSubmit(): void {
     console.log(this.email);
   }
 }

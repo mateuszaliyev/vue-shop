@@ -9,9 +9,10 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component
 export default class IconButton extends Vue {
-  @Prop() icon!: string;
+  @Prop({ default: "", required: true, type: String })
+  protected readonly icon!: string;
 
-  handleClick(): void {
+  protected handleClick(): void {
     this.$emit("click");
   }
 }

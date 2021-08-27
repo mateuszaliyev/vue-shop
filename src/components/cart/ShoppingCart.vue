@@ -62,23 +62,23 @@ import { CartItem } from "@/store/cart/types";
   },
 })
 export default class ShoppingCart extends Vue {
-  modalOpen = false;
+  protected modalOpen = false;
 
-  handleModalClose(): void {
+  protected handleModalClose(): void {
     this.$router.replace("/shirts");
     this.$store.dispatch("deleteCart");
     this.modalOpen = false;
   }
 
-  handleModalOpen(): void {
+  protected handleModalOpen(): void {
     this.modalOpen = true;
   }
 
-  get cart(): CartItem[] {
+  protected get cart(): CartItem[] {
     return this.$store.getters.getCartItems;
   }
 
-  get delivery(): number {
+  protected get delivery(): number {
     return this.cart.reduce(
       (prev, item) =>
         prev +
@@ -88,18 +88,18 @@ export default class ShoppingCart extends Vue {
     );
   }
 
-  get total(): number {
+  protected get total(): number {
     return this.delivery + this.totalPrice;
   }
 
-  get totalPrice(): number {
+  protected get totalPrice(): number {
     return this.cart.reduce(
       (prev, item) => prev + parseFloat(item.price.slice(1)) * item.quantity,
       0
     );
   }
 
-  get totalQuantity(): number {
+  protected get totalQuantity(): number {
     return this.cart.reduce((prev, item) => prev + item.quantity, 0);
   }
 }

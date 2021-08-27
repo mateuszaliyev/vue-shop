@@ -51,7 +51,7 @@ import IconButton from "@/components/input/IconButton.vue";
 import TheButton from "@/components/input/TheButton.vue";
 import TheInput from "@/components/input/TheInput.vue";
 
-import { CartItem } from "@/store/cart/types";
+import { CartItem, cartItemDefault } from "@/store/cart/types";
 
 @Component({
   components: {
@@ -61,31 +61,34 @@ import { CartItem } from "@/store/cart/types";
   },
 })
 export default class ShoppingCartItem extends Vue {
-  @Prop() item!: CartItem;
-  @Prop() tag!: string;
+  @Prop({ default: cartItemDefault, required: true, type: Object })
+  protected readonly item!: CartItem;
 
-  handleRemove(): void {
+  @Prop({ default: "", required: false, type: String })
+  protected readonly tag!: string;
+
+  protected handleRemove(): void {
     this.$store.dispatch("removeProductFromACart", this.item);
   }
 
-  get cart(): CartItem[] {
+  protected get cart(): CartItem[] {
     return this.$store.getters.getCartItems;
   }
 
-  get itemPath(): string {
+  protected get itemPath(): string {
     return `/products/${this.item.id}`;
   }
 
-  get price(): string {
+  protected get price(): string {
     const priceAsNumber = parseFloat(this.item.price.slice(1));
     return `$${(priceAsNumber * this.item.quantity).toFixed(2)}`;
   }
 
-  get quantity(): number {
+  protected get quantity(): number {
     return this.$store.getters.getCartItemQuantity(this.item);
   }
 
-  set quantity(value: number) {
+  protected set quantity(value: number) {
     this.$store.dispatch("setCartItemQuantity", {
       item: this.item,
       quantity: value || 0,

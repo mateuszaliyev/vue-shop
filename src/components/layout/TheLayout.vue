@@ -1,5 +1,4 @@
 <template>
-  <!-- Sidebar -->
   <div v-frag>
     <header-mobile />
     <the-overlay />

@@ -98,44 +98,44 @@ import TheSidebarItem from "@/components/layout/TheSidebarItem.vue";
   },
 })
 export default class TheSidebar extends Vue {
-  extended = false;
-  newsletterEmail = "";
-  newsletterOpen = false;
+  protected extended = false;
+  protected newsletterEmail = "";
+  protected newsletterOpen = false;
 
-  handleClose(): void {
+  protected handleClose(): void {
     this.$store.dispatch("toggleSidebar");
   }
 
-  handleNewsletterClose(): void {
+  protected handleNewsletterClose(): void {
     this.newsletterOpen = false;
   }
 
-  handleNewsletterOpen(): void {
+  protected handleNewsletterOpen(): void {
     this.newsletterOpen = true;
   }
 
-  handleNewsletterSubmit(): void {
+  protected handleNewsletterSubmit(): void {
     console.log(this.newsletterEmail);
     this.newsletterOpen = false;
   }
 
   @Watch("$route")
-  onRouteChange(): void {
+  protected onRouteChange(): void {
     this.$store.dispatch("hideSidebar");
   }
 
   @Watch("sidebarVisibility", { immediate: true })
-  onSidebarVisibilityChange(value: boolean): void {
+  protected onSidebarVisibilityChange(value: boolean): void {
     this.extended = value;
   }
 
-  get classes(): { [key: string]: boolean } {
+  protected get classes(): { [key: string]: boolean } {
     return {
       "nav--extended": this.extended,
     };
   }
 
-  get sidebarVisibility(): boolean {
+  protected get sidebarVisibility(): boolean {
     return this.$store.getters.getSidebarVisibility;
   }
 }

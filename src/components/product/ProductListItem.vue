@@ -30,19 +30,32 @@ import TheButton from "@/components/input/TheButton.vue";
   },
 })
 export default class ProductListItem extends Vue {
-  @Prop() alt!: string;
-  @Prop(Boolean) button!: boolean;
-  @Prop() href!: string;
-  @Prop() price!: string;
-  @Prop() src!: string;
-  @Prop() tag!: string;
-  @Prop() title!: string;
+  @Prop({ default: "", required: false, type: String })
+  protected readonly alt!: string;
 
-  handleClick(): void {
+  @Prop({ default: false, required: false, type: Boolean })
+  protected readonly button!: boolean;
+
+  @Prop({ default: "", required: true, type: String })
+  protected readonly href!: string;
+
+  @Prop({ default: "$0.00", required: true, type: String })
+  protected readonly price!: string;
+
+  @Prop({ default: "", required: true, type: String })
+  protected readonly src!: string;
+
+  @Prop({ default: "", required: false, type: String })
+  protected readonly tag!: string;
+
+  @Prop({ default: "", required: true, type: String })
+  protected readonly title!: string;
+
+  protected handleClick(): void {
     this.$emit("buttonClick");
   }
 
-  get priceClasses(): { [key: string]: boolean } {
+  protected get priceClasses(): { [key: string]: boolean } {
     return {
       "price--sale":
         this.tag !== undefined && this.tag.toLowerCase() === "sale",

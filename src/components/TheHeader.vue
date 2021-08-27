@@ -19,8 +19,11 @@ import IconButton from "@/components/input/IconButton.vue";
   },
 })
 export default class TheHeader extends Vue {
-  @Prop(Boolean) cart!: boolean;
-  @Prop(Boolean) search!: boolean;
+  @Prop({ default: false, required: false, type: Boolean })
+  protected readonly cart!: boolean;
+
+  @Prop({ default: false, required: false, type: Boolean })
+  protected readonly search!: boolean;
 }
 </script>
 

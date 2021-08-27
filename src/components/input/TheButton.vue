@@ -7,17 +7,18 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 
-import { TheButtonColor } from "@/components/input/types";
+type TheButtonColor = "default" | "primary";
 
 @Component
 export default class TheButton extends Vue {
-  @Prop() color!: TheButtonColor;
+  @Prop({ default: "default", required: false, type: String })
+  protected readonly color!: TheButtonColor;
 
-  handleClick(): void {
+  protected handleClick(): void {
     this.$emit("click");
   }
 
-  get classes(): { [key: string]: boolean } {
+  protected get classes(): { [key: string]: boolean } {
     return {
       [this.color ? `button--${this.color}` : "button--default"]: true,
     };

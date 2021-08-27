@@ -16,7 +16,7 @@ import IconButton from "@/components/input/IconButton.vue";
   },
 })
 export default class TheHeader extends Vue {
-  handleClick(): void {
+  protected handleClick(): void {
     this.$store.dispatch("toggleSidebar");
   }
 }
