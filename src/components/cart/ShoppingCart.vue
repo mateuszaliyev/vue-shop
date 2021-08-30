@@ -23,25 +23,10 @@
           <span>{{ `$${total.toFixed(2)}` }}</span>
         </li>
       </ul>
-      <the-button @click="handleModalOpen" v-if="this.cart.length"
+      <the-button @click="handleSubmit" v-if="this.cart.length"
         >Checkout</the-button
       >
     </section>
-    <the-modal
-      @close="handleModalClose"
-      :open="modalOpen"
-      title="Order complete"
-    >
-      <div class="modal__content">
-        <p>You will receive a confirmation email with details of your order</p>
-        <the-button
-          class="modal__button"
-          @click="handleModalClose"
-          color="primary"
-          >Browse more products</the-button
-        >
-      </div>
-    </the-modal>
   </div>
 </template>
 
@@ -52,7 +37,7 @@ import ShoppingCartItem from "@/components/cart/ShoppingCartItem.vue";
 import TheButton from "@/components/input/TheButton.vue";
 import TheModal from "@/components/TheModal.vue";
 
-import { CartItem } from "@/store/cart/types";
+import { CartItem } from "@/store/checkout/types";
 
 @Component({
   components: {
@@ -62,20 +47,13 @@ import { CartItem } from "@/store/cart/types";
   },
 })
 export default class ShoppingCart extends Vue {
-  protected modalOpen = false;
-
-  protected handleModalClose(): void {
-    this.$router.replace("/shirts");
-    this.$store.dispatch("deleteCart");
-    this.modalOpen = false;
-  }
-
-  protected handleModalOpen(): void {
-    this.modalOpen = true;
+  protected handleSubmit(): void {
+    this.$store.dispatch("setCurrentStep", 1);
+    this.$router.push("/checkout");
   }
 
   protected get cart(): CartItem[] {
-    return this.$store.getters.getCartItems;
+    return this.$store.getters.getCart;
   }
 
   protected get delivery(): number {

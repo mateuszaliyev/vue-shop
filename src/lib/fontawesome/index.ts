@@ -2,6 +2,7 @@ import { IconDefinition } from "@fortawesome/fontawesome-common-types";
 
 import { faAddressCard } from "@fortawesome/free-solid-svg-icons/faAddressCard";
 import { faBars } from "@fortawesome/free-solid-svg-icons/faBars";
+import { faCheck } from "@fortawesome/free-solid-svg-icons/faCheck";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons/faCaretDown";
 import { faCaretRight } from "@fortawesome/free-solid-svg-icons/faCaretRight";
 import { faCcAmex } from "@fortawesome/free-brands-svg-icons/faCcAmex";
@@ -24,6 +25,7 @@ import { faTwitter } from "@fortawesome/free-brands-svg-icons/faTwitter";
 const icons: IconDefinition[] = [
   faAddressCard,
   faBars,
+  faCheck,
   faClipboardList,
   faCaretDown,
   faCaretRight,

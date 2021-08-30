@@ -11,11 +11,21 @@
         :class="connectorClasses(index)"
         v-if="index > 0"
       ></span>
-      <div class="icon">
+      <router-link class="link" :to="step.href" v-if="currentStep >= index">
+        <div class="icon">
+          <font-awesome-icon :icon="step.icon"></font-awesome-icon>
+        </div>
+      </router-link>
+      <div class="icon" v-else>
         <font-awesome-icon :icon="step.icon"></font-awesome-icon>
       </div>
       <span class="text">
-        {{ step.title }}
+        <router-link class="link" :to="step.href" v-if="currentStep >= index">
+          {{ step.title }}
+        </router-link>
+        <template v-else>
+          {{ step.title }}
+        </template>
       </span>
     </div>
   </div>
@@ -24,10 +34,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 
-export interface Step {
-  icon: string;
-  title: string;
-}
+import { Step } from "@/lib/types";
 
 @Component
 export default class TheStepper extends Vue {
@@ -39,13 +46,15 @@ export default class TheStepper extends Vue {
 
   protected connectorClasses(index: number): { [key: string]: boolean } {
     return {
-      "connector--done": this.currentStep >= index,
+      "connector--current": this.currentStep === index,
+      "connector--done": this.currentStep > index,
     };
   }
 
   protected stepClasses(index: number): { [key: string]: boolean } {
     return {
-      "step--done": this.currentStep >= index,
+      "step--current": this.currentStep === index,
+      "step--done": this.currentStep > index,
     };
   }
 }
@@ -56,7 +65,7 @@ export default class TheStepper extends Vue {
 @use "../styles/z";
 
 .connector {
-  background-color: colors.$gray-200;
+  background: colors.$gray-200;
   display: block;
   height: 0.4rem;
   left: -50%;
@@ -66,8 +75,12 @@ export default class TheStepper extends Vue {
   top: 2.4rem;
   width: 100%;
 
+  &--current {
+    background: linear-gradient(90deg, colors.$text-primary, colors.$primary);
+  }
+
   &--done {
-    background-color: colors.$primary;
+    background: colors.$primary;
   }
 }
 
@@ -84,6 +97,10 @@ export default class TheStepper extends Vue {
   @include z.index(foreground);
 }
 
+.link {
+  text-decoration: none;
+}
+
 .step {
   align-items: center;
   display: flex;
@@ -92,14 +109,23 @@ export default class TheStepper extends Vue {
   position: relative;
   width: 100%;
 
+  &--current,
   &--done {
     .icon {
-      background-color: colors.$primary;
+      background: colors.$primary;
+      cursor: pointer;
     }
 
     .text {
       color: colors.$text-primary;
+      cursor: pointer;
       font-weight: 700;
+    }
+  }
+
+  &--done {
+    .icon {
+      background: colors.$text-primary;
     }
   }
 }

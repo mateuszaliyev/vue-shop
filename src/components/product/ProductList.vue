@@ -19,8 +19,8 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 
 import ProductListItem from "@/components/product/ProductListItem.vue";
 
-import { CartItem } from "@/store/cart/types";
-import { Product, productDefault } from "@/store/product/types";
+import { CartItem } from "@/store/checkout/types";
+import { Product, PRODUCT_DEFAULT } from "@/store/product/types";
 
 @Component({
   components: {
@@ -28,7 +28,7 @@ import { Product, productDefault } from "@/store/product/types";
   },
 })
 export default class ProductList extends Vue {
-  @Prop({ default: productDefault, required: true, type: Array })
+  @Prop({ default: PRODUCT_DEFAULT, required: true, type: Array })
   protected readonly products!: Product[];
 
   protected addProductToACart(product: Product): void {
@@ -44,7 +44,7 @@ export default class ProductList extends Vue {
   }
 
   protected get cart(): CartItem[] {
-    return this.$store.getters.getCartItems;
+    return this.$store.getters.getCart;
   }
 }
 </script>

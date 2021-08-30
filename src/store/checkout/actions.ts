@@ -1,22 +1,21 @@
 import { ActionTree } from "vuex";
 
-import { CartItem, CartState } from "@/store/cart/types";
-import { RootState } from "@/store/types";
-import { SET_CART_ITEMS } from "@/store/cart/mutation-types";
-
+import { CartItem, CheckoutState } from "@/store/checkout/types";
 import { Product } from "@/store/product/types";
+import { RootState } from "@/store/types";
+import { SET_CART } from "@/store/checkout/mutation-types";
 
-const actions: ActionTree<CartState, RootState> = {
+const actions: ActionTree<CheckoutState, RootState> = {
   addProductToACart(
     { commit, dispatch, state },
     payload: { product: Product; quantity?: number }
   ) {
-    const existingItem = state.cartItems.find(
+    const existingItem = state.cart.find(
       (item) => item.id === payload.product.id
     );
 
     if (existingItem) {
-      const newCart: CartItem[] = state.cartItems.map((item) => {
+      const newCart: CartItem[] = state.cart.map((item) => {
         if (existingItem.id === item.id) {
           return {
             ...item,
@@ -27,21 +26,21 @@ const actions: ActionTree<CartState, RootState> = {
         return item;
       });
 
-      commit(SET_CART_ITEMS, newCart);
+      commit(SET_CART, newCart);
       dispatch("storeCart");
     } else {
       const newCart: CartItem[] = [
-        ...state.cartItems,
+        ...state.cart,
         { ...payload.product, quantity: payload.quantity ?? 1 },
       ];
 
-      commit(SET_CART_ITEMS, newCart);
+      commit(SET_CART, newCart);
       dispatch("storeCart");
     }
   },
 
   deleteCart({ commit, dispatch }) {
-    commit(SET_CART_ITEMS, []);
+    commit(SET_CART, []);
     dispatch("storeCart");
   },
 
@@ -50,15 +49,15 @@ const actions: ActionTree<CartState, RootState> = {
       ? JSON.parse(localStorage.cart)
       : [];
 
-    if (!state.cartItems.length && localStorageCart.length) {
-      commit(SET_CART_ITEMS, localStorageCart);
+    if (!state.cart.length && localStorageCart.length) {
+      commit(SET_CART, localStorageCart);
     }
   },
 
   removeProductFromACart({ commit, dispatch, state }, payload: Product) {
     commit(
-      SET_CART_ITEMS,
-      state.cartItems.filter((item) => item.id !== payload.id)
+      SET_CART,
+      state.cart.filter((item) => item.id !== payload.id)
     );
     dispatch("storeCart");
   },
@@ -67,16 +66,16 @@ const actions: ActionTree<CartState, RootState> = {
     { commit, dispatch, state },
     payload: { item: Product; quantity: number }
   ) {
-    const newCart = [...state.cartItems];
+    const newCart = [...state.cart];
     const itemIndex = newCart.findIndex((item) => item.id === payload.item.id);
     newCart[itemIndex].quantity = payload.quantity;
 
-    commit(SET_CART_ITEMS, newCart);
+    commit(SET_CART, newCart);
     dispatch("storeCart");
   },
 
   storeCart({ state }) {
-    localStorage.cart = JSON.stringify(state.cartItems);
+    localStorage.cart = JSON.stringify(state.cart);
   },
 };
 

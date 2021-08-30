@@ -51,7 +51,7 @@ import IconButton from "@/components/input/IconButton.vue";
 import TheButton from "@/components/input/TheButton.vue";
 import TheInput from "@/components/input/TheInput.vue";
 
-import { CartItem, cartItemDefault } from "@/store/cart/types";
+import { CartItem, CART_DEFAULT } from "@/store/checkout/types";
 
 @Component({
   components: {
@@ -61,7 +61,7 @@ import { CartItem, cartItemDefault } from "@/store/cart/types";
   },
 })
 export default class ShoppingCartItem extends Vue {
-  @Prop({ default: cartItemDefault, required: true, type: Object })
+  @Prop({ default: CART_DEFAULT, required: true, type: Object })
   protected readonly item!: CartItem;
 
   @Prop({ default: "", required: false, type: String })
@@ -72,7 +72,7 @@ export default class ShoppingCartItem extends Vue {
   }
 
   protected get cart(): CartItem[] {
-    return this.$store.getters.getCartItems;
+    return this.$store.getters.getCart;
   }
 
   protected get itemPath(): string {

@@ -1,9 +1,11 @@
 <template>
   <input
+    :autocomplete="autocomplete"
     class="input"
     @input="handleInput"
     :max="max"
     :min="min"
+    :name="name"
     :placeholder="placeholder"
     :required="required"
     :type="type"
@@ -18,11 +20,17 @@ type InputType = "number" | "text";
 
 @Component
 export default class TheInput extends Vue {
+  @Prop({ default: "", required: false, type: String })
+  protected readonly autocomplete!: string;
+
   @Prop({ default: 0, required: false, type: Number })
   protected readonly max!: number;
 
   @Prop({ default: 0, required: false, type: Number })
   protected readonly min!: number;
+
+  @Prop({ default: "", required: false, type: String })
+  protected readonly name!: string;
 
   @Prop({ default: "", required: false, type: String })
   protected readonly placeholder!: string;

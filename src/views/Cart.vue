@@ -2,7 +2,7 @@
   <div v-frag>
     <the-header>Cart</the-header>
     <div class="container">
-      <the-stepper class="stepper" :currentStep="currentStep" :steps="steps" />
+      <the-stepper class="stepper" :currentStep="0" :steps="steps" />
     </div>
     <shopping-cart />
   </div>
@@ -13,7 +13,10 @@ import { Component, Vue } from "vue-property-decorator";
 
 import ShoppingCart from "@/components/cart/ShoppingCart.vue";
 import TheHeader from "@/components/TheHeader.vue";
-import TheStepper, { Step } from "@/components/TheStepper.vue";
+import TheStepper from "@/components/TheStepper.vue";
+
+import { CHECKOUT_STEPS } from "@/lib/constants";
+import { Step } from "@/lib/types";
 
 @Component({
   components: {
@@ -23,22 +26,9 @@ import TheStepper, { Step } from "@/components/TheStepper.vue";
   },
 })
 export default class Cart extends Vue {
-  currentStep = 0;
-
-  steps: Step[] = [
-    {
-      icon: "shopping-cart",
-      title: "Order details",
-    },
-    {
-      icon: "address-card",
-      title: "Personal details",
-    },
-    {
-      icon: "clipboard-list",
-      title: "Summary",
-    },
-  ];
+  get steps(): ReadonlyArray<Step> {
+    return CHECKOUT_STEPS;
+  }
 }
 </script>
 

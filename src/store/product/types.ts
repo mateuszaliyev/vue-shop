@@ -19,7 +19,7 @@ export interface ProductState {
   productLoading: boolean;
 }
 
-export const productDefault: Product = {
+export const PRODUCT_DEFAULT: Product = {
   company: "",
   description: "",
   id: 0,
