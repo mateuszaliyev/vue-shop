@@ -1,21 +1,25 @@
 <template>
   <header class="dark header">
     <div class="logo">Logo</div>
-    <icon-button class="button" @click="handleClick" icon="bars"></icon-button>
+    <v-button-icon
+      class="button"
+      @click="handleClick"
+      icon="bars"
+    ></v-button-icon>
   </header>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 
-import IconButton from "@/components/input/IconButton.vue";
+import VButtonIcon from "@/components/input/VButtonIcon.vue";
 
 @Component({
   components: {
-    IconButton,
+    VButtonIcon,
   },
 })
-export default class TheHeader extends Vue {
+export default class TheHeaderMobile extends Vue {
   protected handleClick(): void {
     this.$store.dispatch("toggleSidebar");
   }

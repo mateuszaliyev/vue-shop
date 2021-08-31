@@ -2,7 +2,7 @@
   <div class="modal" :class="classes" v-show="open">
     <div class="content">
       <div class="headline">
-        <icon-button class="close" @click="handleClose" icon="times" />
+        <v-button-icon class="close" @click="handleClose" icon="times" />
         <h2 class="title">{{ title }}</h2>
       </div>
       <slot></slot>
@@ -13,14 +13,14 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 
-import IconButton from "@/components/input/IconButton.vue";
+import VButtonIcon from "@/components/input/VButtonIcon.vue";
 
 @Component({
   components: {
-    IconButton,
+    VButtonIcon,
   },
 })
-export default class TheModal extends Vue {
+export default class VModal extends Vue {
   @Prop({ default: false, required: false, type: Boolean })
   protected readonly open!: boolean;
 

@@ -1,19 +1,23 @@
 <template>
   <figure class="item">
     <div class="image__container">
-      <router-link class="link" :to="href">
-        <img :alt="alt" class="image" :src="src" />
+      <router-link class="link" :to="productPath">
+        <img :alt="product.productName" class="image" :src="product.image" />
       </router-link>
       <span class="dark tag" v-if="tag">{{ tag }}</span>
-      <the-button class="button" @click="handleClick" v-show="button">
+      <v-button
+        class="button"
+        @click="addProductToACart"
+        v-show="!productInACart"
+      >
         Buy now <font-awesome-icon icon="shopping-cart" />
-      </the-button>
+      </v-button>
     </div>
-    <router-link class="link" :to="href">
+    <router-link class="link" :to="productPath">
       <figcaption class="caption">
-        {{ title }}
+        {{ product.productName }}
         <br />
-        <strong :class="priceClasses">{{ price }}</strong>
+        <strong :class="priceClasses">{{ product.price }}</strong>
       </figcaption>
     </router-link>
   </figure>
@@ -22,37 +26,33 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 
-import TheButton from "@/components/input/TheButton.vue";
+import VButton from "@/components/input/VButton.vue";
+
+import { Product, PRODUCT_DEFAULT } from "@/store/product/types";
+import { CartItem } from "@/store/checkout/types";
 
 @Component({
   components: {
-    TheButton,
+    VButton,
   },
 })
 export default class ProductListItem extends Vue {
-  @Prop({ default: "", required: false, type: String })
-  protected readonly alt!: string;
-
-  @Prop({ default: false, required: false, type: Boolean })
-  protected readonly button!: boolean;
-
-  @Prop({ default: "", required: true, type: String })
-  protected readonly href!: string;
-
-  @Prop({ default: "$0.00", required: true, type: String })
-  protected readonly price!: string;
-
-  @Prop({ default: "", required: true, type: String })
-  protected readonly src!: string;
+  @Prop({ default: PRODUCT_DEFAULT, required: true, type: Object })
+  protected readonly product!: Product;
 
   @Prop({ default: "", required: false, type: String })
   protected readonly tag!: string;
 
-  @Prop({ default: "", required: true, type: String })
-  protected readonly title!: string;
+  protected addProductToACart(): void {
+    this.$store.dispatch("addProductToACart", { product: this.product });
+  }
 
   protected handleClick(): void {
     this.$emit("buttonClick");
+  }
+
+  protected get cart(): CartItem[] {
+    return this.$store.getters.getCart;
   }
 
   protected get priceClasses(): { [key: string]: boolean } {
@@ -60,6 +60,14 @@ export default class ProductListItem extends Vue {
       "price--sale":
         this.tag !== undefined && this.tag.toLowerCase() === "sale",
     };
+  }
+
+  protected get productInACart(): boolean {
+    return this.cart.some((item) => item.id === this.product.id);
+  }
+
+  protected get productPath(): string {
+    return `/products/${this.product.id}`;
   }
 }
 </script>

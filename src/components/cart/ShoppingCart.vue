@@ -23,8 +23,8 @@
           <span>{{ `$${total.toFixed(2)}` }}</span>
         </li>
       </ul>
-      <the-button @click="handleSubmit" v-if="this.cart.length"
-        >Checkout</the-button
+      <v-button @click="handleSubmit" v-if="this.cart.length"
+        >Checkout</v-button
       >
     </section>
   </div>
@@ -34,21 +34,20 @@
 import { Component, Vue } from "vue-property-decorator";
 
 import ShoppingCartItem from "@/components/cart/ShoppingCartItem.vue";
-import TheButton from "@/components/input/TheButton.vue";
-import TheModal from "@/components/TheModal.vue";
+import VButton from "@/components/input/VButton.vue";
+import VModal from "@/components/VModal.vue";
 
 import { CartItem } from "@/store/checkout/types";
 
 @Component({
   components: {
     ShoppingCartItem,
-    TheButton,
-    TheModal,
+    VButton,
+    VModal,
   },
 })
 export default class ShoppingCart extends Vue {
   protected handleSubmit(): void {
-    this.$store.dispatch("setCurrentStep", 1);
     this.$router.push("/checkout");
   }
 

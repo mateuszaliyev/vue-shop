@@ -3,13 +3,16 @@
     <h1 class="heading">Subscribe</h1>
     <p class="paragraph">To get special offers and VIP treatment:</p>
     <form @submit.prevent="handleSubmit">
-      <the-input
+      <v-input
+        autocomplete="email"
         class="input"
+        name="email"
         placeholder="Enter e-mail"
         required
+        type="email"
         v-model="email"
       />
-      <the-button class="button" color="primary">Subscribe</the-button>
+      <v-button class="button" color="primary">Subscribe</v-button>
     </form>
   </section>
 </template>
@@ -17,16 +20,16 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 
-import TheButton from "@/components/input/TheButton.vue";
-import TheInput from "@/components/input/TheInput.vue";
+import VButton from "@/components/input/VButton.vue";
+import VInput from "@/components/input/VInput.vue";
 
 @Component({
   components: {
-    TheButton,
-    TheInput,
+    VButton,
+    VInput,
   },
 })
-export default class SubscribeSection extends Vue {
+export default class TheSubscribeSection extends Vue {
   protected email = "";
 
   protected handleSubmit(): void {

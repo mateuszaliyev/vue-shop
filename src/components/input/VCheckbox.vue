@@ -5,6 +5,7 @@
       class="input"
       :id="customId"
       :name="name"
+      :required="required"
       type="checkbox"
       v-model="checked"
     />
@@ -18,12 +19,15 @@
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 
 @Component
-export default class TheCheckbox extends Vue {
+export default class VCheckbox extends Vue {
   @Prop({ default: "", required: false, type: String })
   protected readonly id!: string;
 
   @Prop({ default: "", required: false, type: String })
   protected readonly name!: string;
+
+  @Prop({ default: false, required: false, type: Boolean })
+  protected readonly required!: boolean;
 
   @Watch("id")
   onIdChange(value: string): void {
@@ -76,7 +80,11 @@ export default class TheCheckbox extends Vue {
 }
 
 .input {
-  display: none;
+  left: 50%;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .label {

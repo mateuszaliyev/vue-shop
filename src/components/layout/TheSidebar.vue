@@ -3,39 +3,30 @@
     <nav class="nav" :class="classes">
       <div class="logo">
         LOGO
-        <icon-button
+        <v-button-icon
           class="close"
           @click="handleClose"
           icon="times"
-        ></icon-button>
+        ></v-button-icon>
       </div>
       <ul class="categories">
-        <the-sidebar-item href="/shirts" title="Shirts"></the-sidebar-item>
-        <the-sidebar-item href="/dresses" title="Dresses"></the-sidebar-item>
-        <the-sidebar-item title="Jeans">
+        <sidebar-item href="/shirts" title="Shirts"></sidebar-item>
+        <sidebar-item href="/dresses" title="Dresses"></sidebar-item>
+        <sidebar-item title="Jeans">
           <ul class="subcategories">
-            <the-sidebar-item
-              href="/jeans/skinny"
-              title="Skinny"
-            ></the-sidebar-item>
-            <the-sidebar-item
-              href="/jeans/relaxed"
-              title="Relaxed"
-            ></the-sidebar-item>
-            <the-sidebar-item
-              href="/jeans/bootcut"
-              title="Bootcut"
-            ></the-sidebar-item>
-            <the-sidebar-item
+            <sidebar-item href="/jeans/skinny" title="Skinny"></sidebar-item>
+            <sidebar-item href="/jeans/relaxed" title="Relaxed"></sidebar-item>
+            <sidebar-item href="/jeans/bootcut" title="Bootcut"></sidebar-item>
+            <sidebar-item
               href="/jeans/straight"
               title="Straight"
-            ></the-sidebar-item>
+            ></sidebar-item>
           </ul>
-        </the-sidebar-item>
-        <the-sidebar-item href="/jackets" title="Jackets"></the-sidebar-item>
-        <the-sidebar-item href="/gymwear" title="Gymwear"></the-sidebar-item>
-        <the-sidebar-item href="/blazers" title="Blazers"></the-sidebar-item>
-        <the-sidebar-item href="/shoes" title="Shoes"></the-sidebar-item>
+        </sidebar-item>
+        <sidebar-item href="/jackets" title="Jackets"></sidebar-item>
+        <sidebar-item href="/gymwear" title="Gymwear"></sidebar-item>
+        <sidebar-item href="/blazers" title="Blazers"></sidebar-item>
+        <sidebar-item href="/shoes" title="Shoes"></sidebar-item>
       </ul>
       <ul class="useful">
         <li class="useful__item">
@@ -54,7 +45,7 @@
         </li>
       </ul>
     </nav>
-    <the-modal
+    <v-modal
       @close="handleNewsletterClose"
       :open="newsletterOpen"
       title="Newsletter"
@@ -64,37 +55,39 @@
           Join our mailing list to receive updates on new arrivals and special
           offers.
         </p>
-        <the-input
+        <v-input
+          autocomplete="email"
           class="newsletter__input"
+          name="email"
           placeholder="Enter e-mail"
           required
           type="email"
           v-model="newsletterEmail"
         />
-        <the-button class="newsletter__button" color="primary"
-          >Subscribe</the-button
+        <v-button class="newsletter__button" color="primary"
+          >Subscribe</v-button
         >
       </form>
-    </the-modal>
+    </v-modal>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue, Watch } from "vue-property-decorator";
 
-import IconButton from "@/components/input/IconButton.vue";
-import TheButton from "@/components/input/TheButton.vue";
-import TheInput from "@/components/input/TheInput.vue";
-import TheModal from "@/components/TheModal.vue";
-import TheSidebarItem from "@/components/layout/TheSidebarItem.vue";
+import VButtonIcon from "@/components/input/VButtonIcon.vue";
+import VButton from "@/components/input/VButton.vue";
+import VInput from "@/components/input/VInput.vue";
+import VModal from "@/components/VModal.vue";
+import SidebarItem from "@/components/layout/SidebarItem.vue";
 
 @Component({
   components: {
-    IconButton,
-    TheButton,
-    TheInput,
-    TheModal,
-    TheSidebarItem,
+    VButtonIcon,
+    SidebarItem,
+    VButton,
+    VInput,
+    VModal,
   },
 })
 export default class TheSidebar extends Vue {

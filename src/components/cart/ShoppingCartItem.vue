@@ -5,16 +5,16 @@
         <img :alt="item.productName" class="image" :src="item.image" />
       </router-link>
       <span class="dark tag" v-if="tag">{{ tag }}</span>
-      <the-button class="remove__button" @click="handleRemove">
+      <v-button class="remove__button" @click="handleRemove">
         Remove <font-awesome-icon icon="trash" />
-      </the-button>
+      </v-button>
     </div>
     <div class="details">
-      <icon-button
+      <v-button-icon
         class="remove__icon"
         @click="handleRemove"
         icon="times"
-      ></icon-button>
+      ></v-button-icon>
       <p class="title">
         <router-link class="link" :to="itemPath">
           {{ item.productName }}
@@ -30,7 +30,7 @@
             >Quantity:
           </label>
           <label class="quantity--mobile" :for="`q-${item.id}`">Qty: </label>
-          <the-input
+          <v-input
             class="input"
             :id="`q-${item.id}`"
             :max="100"
@@ -47,17 +47,17 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 
-import IconButton from "@/components/input/IconButton.vue";
-import TheButton from "@/components/input/TheButton.vue";
-import TheInput from "@/components/input/TheInput.vue";
+import VButtonIcon from "@/components/input/VButtonIcon.vue";
+import VButton from "@/components/input/VButton.vue";
+import VInput from "@/components/input/VInput.vue";
 
 import { CartItem, CART_DEFAULT } from "@/store/checkout/types";
 
 @Component({
   components: {
-    IconButton,
-    TheButton,
-    TheInput,
+    VButtonIcon,
+    VButton,
+    VInput,
   },
 })
 export default class ShoppingCartItem extends Vue {

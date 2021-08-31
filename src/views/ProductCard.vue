@@ -13,9 +13,9 @@
           <p class="price--desktop">{{ price }}</p>
           <div class="quantity">
             <label :for="`q-${product.id}`">Quantity:</label>
-            <the-input :max="100" :min="1" type="number" v-model="quantity" />
+            <v-input :max="100" :min="1" type="number" v-model="quantity" />
           </div>
-          <the-button @click="addProductToACart">Add to cart</the-button>
+          <v-button @click="addProductToACart">Add to cart</v-button>
           <p class="description">{{ product.description }}</p>
         </div>
       </section>
@@ -27,16 +27,16 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 
-import TheButton from "@/components/input/TheButton.vue";
-import TheInput from "@/components/input/TheInput.vue";
+import VButton from "@/components/input/VButton.vue";
+import VInput from "@/components/input/VInput.vue";
 import TheHeader from "@/components/TheHeader.vue";
 
 import { Product } from "@/store/product/types";
 
 @Component({
   components: {
-    TheButton,
-    TheInput,
+    VButton,
+    VInput,
     TheHeader,
   },
 })

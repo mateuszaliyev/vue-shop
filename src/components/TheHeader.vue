@@ -2,10 +2,10 @@
   <header class="container header">
     <h1 class="heading"><slot></slot></h1>
     <router-link to="/cart" v-if="cart">
-      <icon-button icon="shopping-cart"></icon-button>
+      <v-button-icon icon="shopping-cart"></v-button-icon>
     </router-link>
     <router-link to="/search" v-if="search">
-      <icon-button icon="search"></icon-button>
+      <v-button-icon icon="search"></v-button-icon>
     </router-link>
   </header>
 </template>
@@ -13,11 +13,11 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 
-import IconButton from "@/components/input/IconButton.vue";
+import VButtonIcon from "@/components/input/VButtonIcon.vue";
 
 @Component({
   components: {
-    IconButton,
+    VButtonIcon,
   },
 })
 export default class TheHeader extends Vue {

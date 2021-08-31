@@ -19,7 +19,7 @@
 import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component
-export default class TheSidebarItem extends Vue {
+export default class SidebarItem extends Vue {
   @Prop({ default: "", required: false, type: String })
   protected readonly href!: string;
   @Prop({ default: "", required: true, type: String })

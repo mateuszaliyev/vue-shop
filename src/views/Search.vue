@@ -2,7 +2,7 @@
   <div v-frag>
     <the-header cart>Search</the-header>
     <section class="container">
-      <the-input
+      <v-input
         class="input"
         @input="handleInput"
         placeholder="Type at least 3 characters..."
@@ -30,19 +30,19 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 
-import IconButton from "@/components/input/IconButton.vue";
+import VButtonIcon from "@/components/input/VButtonIcon.vue";
 import ProductList from "@/components/product/ProductList.vue";
 import TheHeader from "@/components/TheHeader.vue";
-import TheInput from "@/components/input/TheInput.vue";
+import VInput from "@/components/input/VInput.vue";
 
 import { Product } from "@/store/product/types";
 
 @Component({
   components: {
-    IconButton,
+    VButtonIcon,
     ProductList,
     TheHeader,
-    TheInput,
+    VInput,
   },
 })
 export default class Search extends Vue {
@@ -51,6 +51,8 @@ export default class Search extends Vue {
   protected handleInput(): void {
     if (this.ready) {
       this.$router.replace({ name: "Search", params: { query: this.query } });
+    } else if (this.$route.params.query) {
+      this.$router.replace({ name: "Search" });
     }
   }
 

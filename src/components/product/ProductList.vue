@@ -1,15 +1,9 @@
 <template>
   <div class="list">
     <product-list-item
-      :alt="product.productName"
-      :button="!isProductInACart(product)"
-      @buttonClick="addProductToACart(product)"
-      :href="productPath(product)"
-      :key="product.id"
-      :price="product.price"
-      :src="product.image"
-      :title="product.productName"
-      v-for="product in products"
+      :key="index"
+      :product="product"
+      v-for="(product, index) in products"
     />
   </div>
 </template>
@@ -19,7 +13,6 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 
 import ProductListItem from "@/components/product/ProductListItem.vue";
 
-import { CartItem } from "@/store/checkout/types";
 import { Product, PRODUCT_DEFAULT } from "@/store/product/types";
 
 @Component({
@@ -30,22 +23,6 @@ import { Product, PRODUCT_DEFAULT } from "@/store/product/types";
 export default class ProductList extends Vue {
   @Prop({ default: PRODUCT_DEFAULT, required: true, type: Array })
   protected readonly products!: Product[];
-
-  protected addProductToACart(product: Product): void {
-    this.$store.dispatch("addProductToACart", { product });
-  }
-
-  protected isProductInACart(product: Product): boolean {
-    return this.cart.some((item) => item.id === product.id);
-  }
-
-  protected productPath(product: Product): string {
-    return `/products/${product.id}`;
-  }
-
-  protected get cart(): CartItem[] {
-    return this.$store.getters.getCart;
-  }
 }
 </script>
 

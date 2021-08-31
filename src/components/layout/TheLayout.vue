@@ -1,11 +1,11 @@
 <template>
   <div v-frag>
-    <header-mobile />
+    <the-header-mobile />
     <the-overlay />
     <the-sidebar />
     <main class="main">
       <slot></slot>
-      <subscribe-section />
+      <the-subscribe-section />
       <the-footer />
       <section class="dark powered">
         Powered by <a href="https://www.vuejs.org/">Vue.js</a>
@@ -16,19 +16,19 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import HeaderMobile from "@/components/layout/HeaderMobile.vue";
-import SubscribeSection from "@/components/layout/SubscribeSection.vue";
 import TheFooter from "@/components/layout/TheFooter.vue";
+import TheHeaderMobile from "@/components/layout/TheHeaderMobile.vue";
 import TheOverlay from "@/components/layout/TheOverlay.vue";
 import TheSidebar from "@/components/layout/TheSidebar.vue";
+import TheSubscribeSection from "@/components/layout/TheSubscribeSection.vue";
 
 @Component({
   components: {
-    HeaderMobile,
-    SubscribeSection,
     TheFooter,
+    TheHeaderMobile,
     TheOverlay,
     TheSidebar,
+    TheSubscribeSection,
   },
 })
 export default class TheLayout extends Vue {}

@@ -4,21 +4,37 @@
       <h4 class="heading">Contact</h4>
       <p class="paragraph">Questions? Go ahead.</p>
       <form class="form" @submit.prevent="handleSubmit">
-        <the-input class="input" placeholder="Name" required v-model="name" />
-        <the-input class="input" placeholder="Email" required v-model="email" />
-        <the-input
+        <v-input
+          autocomplete="name"
+          class="input"
+          name="name"
+          placeholder="Name"
+          required
+          v-model="name"
+        />
+        <v-input
+          autocomplete="email"
+          class="input"
+          name="email"
+          placeholder="Email"
+          required
+          type="email"
+          v-model="email"
+        />
+        <v-input
+          autocomplete=""
           class="input"
           placeholder="Subject"
           required
           v-model="subject"
         />
-        <the-input
+        <v-input
           class="input"
           placeholder="Message"
           required
           v-model="message"
         />
-        <the-button>Send</the-button>
+        <v-button>Send</v-button>
       </form>
     </div>
     <div class="column">
@@ -86,13 +102,13 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 
-import TheButton from "@/components/input/TheButton.vue";
-import TheInput from "@/components/input/TheInput.vue";
+import VButton from "@/components/input/VButton.vue";
+import VInput from "@/components/input/VInput.vue";
 
 @Component({
   components: {
-    TheButton,
-    TheInput,
+    VButton,
+    VInput,
   },
 })
 export default class TheFooter extends Vue {

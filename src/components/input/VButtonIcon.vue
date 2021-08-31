@@ -8,7 +8,7 @@
 import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component
-export default class IconButton extends Vue {
+export default class VButtonIcon extends Vue {
   @Prop({ default: "", required: true, type: String })
   protected readonly icon!: string;
 

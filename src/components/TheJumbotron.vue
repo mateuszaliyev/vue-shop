@@ -7,7 +7,7 @@
         <h2 class="subtitle">{{ subtitle }}</h2>
       </figcaption>
       <router-link :to="href">
-        <the-button class="button">Shop Now</the-button>
+        <v-button class="button">Shop Now</v-button>
       </router-link>
     </div>
   </figure>
@@ -16,11 +16,11 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 
-import TheButton from "@/components/input/TheButton.vue";
+import VButton from "@/components/input/VButton.vue";
 
 @Component({
   components: {
-    TheButton,
+    VButton,
   },
 })
 export default class TheJumbotron extends Vue {

@@ -8,7 +8,7 @@
       <section class="container form__container">
         <h2 class="headline">Shipping address</h2>
         <div class="row">
-          <the-input
+          <v-input
             autocomplete="shipping given-name"
             class="input"
             name="fname"
@@ -16,7 +16,7 @@
             required
             v-model="shippingAddress.firstName"
           />
-          <the-input
+          <v-input
             autocomplete="shipping family-name"
             class="input"
             name="lname"
@@ -25,7 +25,7 @@
             v-model="shippingAddress.lastName"
           />
         </div>
-        <the-input
+        <v-input
           autocomplete="shipping street-address"
           class="input"
           name="address"
@@ -34,7 +34,7 @@
           v-model="shippingAddress.address"
         />
         <div class="row">
-          <the-input
+          <v-input
             autocomplete="shipping address-level2"
             class="input"
             name="city"
@@ -42,7 +42,7 @@
             required
             v-model="shippingAddress.city"
           />
-          <the-input
+          <v-input
             autocomplete="shipping address-level1"
             class="input"
             name="state"
@@ -52,7 +52,7 @@
           />
         </div>
         <div class="row">
-          <the-input
+          <v-input
             autocomplete="shipping postal-code"
             class="input"
             name="postal"
@@ -60,7 +60,7 @@
             required
             v-model="shippingAddress.postalCode"
           />
-          <the-input
+          <v-input
             autocomplete="shipping country"
             class="input"
             name="country"
@@ -70,7 +70,7 @@
           />
         </div>
         <div class="row">
-          <the-input
+          <v-input
             autocomplete="shipping email"
             class="input"
             name="email"
@@ -79,7 +79,7 @@
             type="email"
             v-model="shippingAddress.email"
           />
-          <the-input
+          <v-input
             autocomplete="shipping phone"
             class="input"
             name="country"
@@ -89,8 +89,8 @@
             v-model="shippingAddress.phone"
           />
         </div>
-        <div class="billing">
-          <the-checkbox id="billing" v-model="billing" />
+        <div class="checkbox">
+          <v-checkbox id="billing" v-model="billing" />
           <label for="billing">
             My billing and delivery information are different.
           </label>
@@ -99,126 +99,146 @@
       <section class="container form__container" v-if="billing">
         <h2 class="headline">Billing Address</h2>
         <div class="row">
-          <the-input
+          <v-input
             autocomplete="billing given-name"
             class="input"
             name="fname"
             placeholder="First name"
-            required
+            :required="billing"
             v-model="billingAddress.firstName"
           />
-          <the-input
+          <v-input
             autocomplete="billing family-name"
             class="input"
             name="lname"
             placeholder="Last name"
-            required
+            :required="billing"
             v-model="billingAddress.lastName"
           />
         </div>
-        <the-input
+        <v-input
           autocomplete="billing street-address"
           class="input"
           name="address"
           placeholder="Address"
-          required
+          :required="billing"
           v-model="billingAddress.address"
         />
         <div class="row">
-          <the-input
+          <v-input
             autocomplete="billing address-level2"
             class="input"
             name="city"
             placeholder="City"
-            required
+            :required="billing"
             v-model="billingAddress.city"
           />
-          <the-input
+          <v-input
             autocomplete="billing address-level1"
             class="input"
             name="state"
             placeholder="State"
-            required
+            :required="billing"
             v-model="billingAddress.state"
           />
         </div>
         <div class="row">
-          <the-input
+          <v-input
             autocomplete="billing postal-code"
             class="input"
             name="postal"
             placeholder="Postal code"
-            required
+            :required="billing"
             v-model="billingAddress.postalCode"
           />
-          <the-input
+          <v-input
             autocomplete="billing country"
             class="input"
             name="country"
             placeholder="Country"
-            required
+            :required="billing"
             v-model="billingAddress.country"
           />
         </div>
-        <the-input
+        <v-input
           autocomplete="billing phone"
           class="input"
           name="country"
           placeholder="Phone number"
-          required
           type="tel"
+          :required="billing"
           v-model="billingAddress.phone"
         />
       </section>
       <section class="container form__container">
         <h2 class="headline">Payment method</h2>
-        <!-- <the-radio
-          @customChange="handlePaymentMethodChange"
-          :value="paymentMethodCreditCard"
-        />
-        <label :for="paymentMethodCreditCard">Credit/Debit card</label>
-        <the-radio
-          @customChange="handlePaymentMethodChange"
-          :value="paymentMethodBankTransfer"
-        />
-        <label :for="paymentMethodBankTransfer">Bank transfer</label> -->
-        <the-input
-          autocomplete="payment cc-number"
-          class="input"
-          name="cardnumber"
-          placeholder="Card number"
-          required
-          v-model="payment.cardNumber"
-        />
-        <the-input
-          autocomplete="payment cc-name"
-          class="input"
-          name="ccname"
-          placeholder="Name on card"
-          required
-          v-model="payment.name"
-        />
         <div class="row">
-          <the-input
-            autocomplete="payment cc-exp"
-            class="input"
-            name="exp-date"
-            placeholder="Expiry date (MM / YY)"
-            required
-            v-model="payment.expiryDate"
+          <v-radio
+            @change="handlePaymentMethodChange(paymentMethodCreditCard)"
+            :checked="payment.method === paymentMethodCreditCard"
+            :id="paymentMethodCreditCard"
           />
-          <the-input
-            autocomplete="payment cc-csc"
+          <label :for="paymentMethodCreditCard">Credit/Debit card</label>
+        </div>
+        <template v-if="payment.method === paymentMethodCreditCard">
+          <v-input
+            autocomplete="payment cc-number"
             class="input"
-            name="cvc"
-            placeholder="Security code (CVV)"
-            required
-            v-model="payment.expiryDate"
+            name="cardnumber"
+            placeholder="Card number"
+            :required="payment.method === paymentMethodCreditCard"
+            v-model="payment.cardNumber"
           />
+          <v-input
+            autocomplete="payment cc-name"
+            class="input"
+            name="ccname"
+            placeholder="Name on card"
+            :required="payment.method === paymentMethodCreditCard"
+            v-model="payment.name"
+          />
+          <div class="row">
+            <v-input
+              autocomplete="payment cc-exp"
+              class="input"
+              name="exp-date"
+              placeholder="Expiry date (MM / YY)"
+              :required="payment.method === paymentMethodCreditCard"
+              v-model="payment.expiryDate"
+            />
+            <v-input
+              autocomplete="payment cc-csc"
+              class="input"
+              name="cvc"
+              placeholder="Security code (CVV)"
+              :required="payment.method === paymentMethodCreditCard"
+              v-model="payment.securityCode"
+            />
+          </div>
+        </template>
+        <div class="row">
+          <v-radio
+            @change="handlePaymentMethodChange(paymentMethodBankTransfer)"
+            :checked="payment.method === paymentMethodBankTransfer"
+            :id="paymentMethodBankTransfer"
+          />
+          <label :for="paymentMethodBankTransfer">Bank transfer</label>
         </div>
       </section>
       <section class="container form__container">
-        <the-button>Place order</the-button>
+        <div class="checkbox">
+          <v-checkbox id="consent" required v-model="consent" />
+          <label for="consent"> I'm 13+ years old. </label>
+        </div>
+        <div class="checkbox">
+          <v-checkbox id="newsletter" v-model="newsletter" />
+          <label for="newsletter">
+            I'd like to receive emails about exclusive sales and more
+          </label>
+        </div>
+      </section>
+      <section class="container form__container">
+        <v-button>Place order</v-button>
       </section>
     </form>
   </div>
@@ -227,11 +247,11 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 
-import TheButton from "@/components/input/TheButton.vue";
-import TheCheckbox from "@/components/input/TheCheckbox.vue";
+import VButton from "@/components/input/VButton.vue";
+import VCheckbox from "@/components/input/VCheckbox.vue";
 import TheHeader from "@/components/TheHeader.vue";
-import TheInput from "@/components/input/TheInput.vue";
-import TheRadio from "@/components/input/TheRadio.vue";
+import VInput from "@/components/input/VInput.vue";
+import VRadio from "@/components/input/VRadio.vue";
 import TheStepper from "@/components/TheStepper.vue";
 
 import { CHECKOUT_STEPS } from "@/lib/constants";
@@ -246,17 +266,19 @@ import {
 
 @Component({
   components: {
-    TheButton,
-    TheCheckbox,
+    VButton,
+    VCheckbox,
     TheHeader,
-    TheInput,
-    TheRadio,
+    VInput,
+    VRadio,
     TheStepper,
   },
 })
 export default class Checkout extends Vue {
   protected billing = false;
   protected billingAddress: Address = ADDRESS_DEFAULT;
+  protected consent = false;
+  protected newsletter = false;
   protected payment: Payment = PAYMENT_DEFAULT;
   protected shippingAddress: Address = ADDRESS_DEFAULT;
 
@@ -293,7 +315,7 @@ export default class Checkout extends Vue {
 </script>
 
 <style lang="scss" scoped>
-.billing {
+.checkbox {
   display: flex;
   gap: 1.6rem;
   margin: 1.6rem 0;

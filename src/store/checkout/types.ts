@@ -38,9 +38,9 @@ export interface PaymentBankTransfer {
 export interface PaymentCreditCard {
   data: {
     cardNumber: string;
-    cvv: number;
     expiryDate: string;
     name: string;
+    securityCode: string;
   };
   method: PaymentMethod.CreditCard;
 }
@@ -65,9 +65,9 @@ export const ADDRESS_DEFAULT: Address = {
 export const PAYMENT_DEFAULT: Payment = {
   data: {
     cardNumber: "",
-    cvv: 0,
     expiryDate: "",
     name: "",
+    securityCode: "000",
   },
   method: PaymentMethod.CreditCard,
 };

@@ -2,6 +2,7 @@
   <input
     :autocomplete="autocomplete"
     class="input"
+    :class="classes"
     @input="handleInput"
     :max="max"
     :min="min"
@@ -16,12 +17,15 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 
-type InputType = "number" | "text";
+type InputType = "email" | "number" | "tel" | "text";
 
 @Component
-export default class TheInput extends Vue {
+export default class VInput extends Vue {
   @Prop({ default: "", required: false, type: String })
   protected readonly autocomplete!: string;
+
+  @Prop({ default: false, required: false, type: Boolean })
+  protected readonly error!: boolean;
 
   @Prop({ default: 0, required: false, type: Number })
   protected readonly max!: number;
@@ -59,6 +63,12 @@ export default class TheInput extends Vue {
       this.$emit("input", target.value);
     }
   }
+
+  protected get classes(): { [key: string]: boolean } {
+    return {
+      "input--error": this.error,
+    };
+  }
 }
 </script>
 
@@ -72,5 +82,9 @@ export default class TheInput extends Vue {
   font-size: inherit;
   line-height: 1.5;
   padding: 0.8rem;
+
+  &--error {
+    border-color: colors.$primary;
+  }
 }
 </style>
