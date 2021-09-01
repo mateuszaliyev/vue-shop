@@ -10,7 +10,16 @@
         <div class="row">
           <v-input
             autocomplete="shipping given-name"
-            class="input"
+            @change="
+              handleValidation(
+                'shippingAddress',
+                'firstName',
+                shippingAddress.validation.firstName(shippingAddress.firstName)
+              )
+            "
+            class="field"
+            :error="Boolean(shippingAddress.helperText.firstName)"
+            :helper-text="shippingAddress.helperText.firstName"
             name="fname"
             placeholder="First name"
             required
@@ -18,7 +27,16 @@
           />
           <v-input
             autocomplete="shipping family-name"
-            class="input"
+            @change="
+              handleValidation(
+                'shippingAddress',
+                'lastName',
+                shippingAddress.validation.lastName(shippingAddress.lastName)
+              )
+            "
+            class="field"
+            :error="Boolean(shippingAddress.helperText.lastName)"
+            :helper-text="shippingAddress.helperText.lastName"
             name="lname"
             placeholder="Last name"
             required
@@ -27,7 +45,16 @@
         </div>
         <v-input
           autocomplete="shipping street-address"
-          class="input"
+          @change="
+            handleValidation(
+              'shippingAddress',
+              'address',
+              shippingAddress.validation.address(shippingAddress.address)
+            )
+          "
+          class="field"
+          :error="Boolean(shippingAddress.helperText.address)"
+          :helper-text="shippingAddress.helperText.address"
           name="address"
           placeholder="Address"
           required
@@ -36,7 +63,16 @@
         <div class="row">
           <v-input
             autocomplete="shipping address-level2"
-            class="input"
+            @change="
+              handleValidation(
+                'shippingAddress',
+                'city',
+                shippingAddress.validation.city(shippingAddress.city)
+              )
+            "
+            class="field"
+            :error="Boolean(shippingAddress.helperText.city)"
+            :helper-text="shippingAddress.helperText.city"
             name="city"
             placeholder="City"
             required
@@ -44,7 +80,16 @@
           />
           <v-input
             autocomplete="shipping address-level1"
-            class="input"
+            @change="
+              handleValidation(
+                'shippingAddress',
+                'state',
+                shippingAddress.validation.state(shippingAddress.state)
+              )
+            "
+            class="field"
+            :error="Boolean(shippingAddress.helperText.state)"
+            :helper-text="shippingAddress.helperText.state"
             name="state"
             placeholder="State"
             required
@@ -54,7 +99,18 @@
         <div class="row">
           <v-input
             autocomplete="shipping postal-code"
-            class="input"
+            @change="
+              handleValidation(
+                'shippingAddress',
+                'postalCode',
+                shippingAddress.validation.postalCode(
+                  shippingAddress.postalCode
+                )
+              )
+            "
+            class="field"
+            :error="Boolean(shippingAddress.helperText.postalCode)"
+            :helper-text="shippingAddress.helperText.postalCode"
             name="postal"
             placeholder="Postal code"
             required
@@ -62,7 +118,16 @@
           />
           <v-input
             autocomplete="shipping country"
-            class="input"
+            @change="
+              handleValidation(
+                'shippingAddress',
+                'country',
+                shippingAddress.validation.country(shippingAddress.country)
+              )
+            "
+            class="field"
+            :error="Boolean(shippingAddress.helperText.country)"
+            :helper-text="shippingAddress.helperText.country"
             name="country"
             placeholder="Country"
             required
@@ -72,7 +137,16 @@
         <div class="row">
           <v-input
             autocomplete="shipping email"
-            class="input"
+            @change="
+              handleValidation(
+                'shippingAddress',
+                'email',
+                shippingAddress.validation.email(shippingAddress.email)
+              )
+            "
+            class="field"
+            :error="Boolean(shippingAddress.helperText.email)"
+            :helper-text="shippingAddress.helperText.email"
             name="email"
             placeholder="Email"
             required
@@ -81,17 +155,28 @@
           />
           <v-input
             autocomplete="shipping phone"
-            class="input"
+            @change="
+              handleValidation(
+                'shippingAddress',
+                'phoneNumber',
+                shippingAddress.validation.phoneNumber(
+                  shippingAddress.phoneNumber
+                )
+              )
+            "
+            class="field"
+            :error="Boolean(shippingAddress.helperText.phoneNumber)"
+            :helper-text="shippingAddress.helperText.phoneNumber"
             name="country"
             placeholder="Phone number"
             required
             type="tel"
-            v-model="shippingAddress.phone"
+            v-model="shippingAddress.phoneNumber"
           />
         </div>
         <div class="checkbox">
           <v-checkbox id="billing" v-model="billing" />
-          <label for="billing">
+          <label class="label" for="billing">
             My billing and delivery information are different.
           </label>
         </div>
@@ -101,7 +186,16 @@
         <div class="row">
           <v-input
             autocomplete="billing given-name"
-            class="input"
+            @change="
+              handleValidation(
+                'billingAddress',
+                'firstName',
+                billingAddress.validation.firstName(billingAddress.firstName)
+              )
+            "
+            class="field"
+            :error="Boolean(billingAddress.helperText.firstName)"
+            :helper-text="billingAddress.helperText.firstName"
             name="fname"
             placeholder="First name"
             :required="billing"
@@ -109,7 +203,16 @@
           />
           <v-input
             autocomplete="billing family-name"
-            class="input"
+            @change="
+              handleValidation(
+                'billingAddress',
+                'lastName',
+                billingAddress.validation.lastName(billingAddress.lastName)
+              )
+            "
+            class="field"
+            :error="Boolean(billingAddress.helperText.lastName)"
+            :helper-text="billingAddress.helperText.lastName"
             name="lname"
             placeholder="Last name"
             :required="billing"
@@ -118,7 +221,16 @@
         </div>
         <v-input
           autocomplete="billing street-address"
-          class="input"
+          @change="
+            handleValidation(
+              'billingAddress',
+              'address',
+              billingAddress.validation.address(billingAddress.address)
+            )
+          "
+          class="field"
+          :error="Boolean(billingAddress.helperText.address)"
+          :helper-text="billingAddress.helperText.address"
           name="address"
           placeholder="Address"
           :required="billing"
@@ -127,7 +239,16 @@
         <div class="row">
           <v-input
             autocomplete="billing address-level2"
-            class="input"
+            @change="
+              handleValidation(
+                'billingAddress',
+                'city',
+                billingAddress.validation.city(billingAddress.city)
+              )
+            "
+            class="field"
+            :error="Boolean(billingAddress.helperText.city)"
+            :helper-text="billingAddress.helperText.city"
             name="city"
             placeholder="City"
             :required="billing"
@@ -135,7 +256,16 @@
           />
           <v-input
             autocomplete="billing address-level1"
-            class="input"
+            @change="
+              handleValidation(
+                'billingAddress',
+                'state',
+                billingAddress.validation.state(billingAddress.state)
+              )
+            "
+            class="field"
+            :error="Boolean(billingAddress.helperText.state)"
+            :helper-text="billingAddress.helperText.state"
             name="state"
             placeholder="State"
             :required="billing"
@@ -145,7 +275,16 @@
         <div class="row">
           <v-input
             autocomplete="billing postal-code"
-            class="input"
+            @change="
+              handleValidation(
+                'billingAddress',
+                'postalCode',
+                billingAddress.validation.postalCode(billingAddress.postalCode)
+              )
+            "
+            class="field"
+            :error="Boolean(billingAddress.helperText.postalCode)"
+            :helper-text="billingAddress.helperText.postalCode"
             name="postal"
             placeholder="Postal code"
             :required="billing"
@@ -153,7 +292,16 @@
           />
           <v-input
             autocomplete="billing country"
-            class="input"
+            @change="
+              handleValidation(
+                'billingAddress',
+                'country',
+                billingAddress.validation.country(billingAddress.country)
+              )
+            "
+            class="field"
+            :error="Boolean(billingAddress.helperText.country)"
+            :helper-text="billingAddress.helperText.country"
             name="country"
             placeholder="Country"
             :required="billing"
@@ -162,12 +310,21 @@
         </div>
         <v-input
           autocomplete="billing phone"
-          class="input"
+          @change="
+            handleValidation(
+              'billingAddress',
+              'phoneNumber',
+              billingAddress.validation.phoneNumber(billingAddress.phoneNumber)
+            )
+          "
+          class="field"
+          :error="Boolean(billingAddress.helperText.phoneNumber)"
+          :helper-text="billingAddress.helperText.phoneNumber"
           name="country"
           placeholder="Phone number"
           type="tel"
           :required="billing"
-          v-model="billingAddress.phone"
+          v-model="billingAddress.phoneNumber"
         />
       </section>
       <section class="container form__container">
@@ -178,12 +335,23 @@
             :checked="payment.method === paymentMethodCreditCard"
             :id="paymentMethodCreditCard"
           />
-          <label :for="paymentMethodCreditCard">Credit/Debit card</label>
+          <label class="label" :for="paymentMethodCreditCard"
+            >Credit/Debit card</label
+          >
         </div>
         <template v-if="payment.method === paymentMethodCreditCard">
           <v-input
             autocomplete="payment cc-number"
-            class="input"
+            @change="
+              handleValidation(
+                'payment',
+                'cardNumber',
+                payment.validation.cardNumber(payment.cardNumber)
+              )
+            "
+            class="field"
+            :error="Boolean(payment.helperText.cardNumber)"
+            :helper-text="payment.helperText.cardNumber"
             name="cardnumber"
             placeholder="Card number"
             :required="payment.method === paymentMethodCreditCard"
@@ -191,7 +359,7 @@
           />
           <v-input
             autocomplete="payment cc-name"
-            class="input"
+            class="field"
             name="ccname"
             placeholder="Name on card"
             :required="payment.method === paymentMethodCreditCard"
@@ -200,7 +368,7 @@
           <div class="row">
             <v-input
               autocomplete="payment cc-exp"
-              class="input"
+              class="field"
               name="exp-date"
               placeholder="Expiry date (MM / YY)"
               :required="payment.method === paymentMethodCreditCard"
@@ -208,7 +376,7 @@
             />
             <v-input
               autocomplete="payment cc-csc"
-              class="input"
+              class="field"
               name="cvc"
               placeholder="Security code (CVV)"
               :required="payment.method === paymentMethodCreditCard"
@@ -222,17 +390,19 @@
             :checked="payment.method === paymentMethodBankTransfer"
             :id="paymentMethodBankTransfer"
           />
-          <label :for="paymentMethodBankTransfer">Bank transfer</label>
+          <label class="label" :for="paymentMethodBankTransfer"
+            >Bank transfer</label
+          >
         </div>
       </section>
       <section class="container form__container">
         <div class="checkbox">
           <v-checkbox id="consent" required v-model="consent" />
-          <label for="consent"> I'm 13+ years old. </label>
+          <label class="label" for="consent"> I'm 13+ years old. </label>
         </div>
         <div class="checkbox">
           <v-checkbox id="newsletter" v-model="newsletter" />
-          <label for="newsletter">
+          <label class="label" for="newsletter">
             I'd like to receive emails about exclusive sales and more
           </label>
         </div>
@@ -255,7 +425,25 @@ import VRadio from "@/components/input/VRadio.vue";
 import TheStepper from "@/components/TheStepper.vue";
 
 import { CHECKOUT_STEPS } from "@/lib/constants";
+import {
+  asFormable,
+  validateCountry,
+  validateEmail,
+  validatePhoneNumber,
+  validatePostalCode,
+  validateRequire,
+} from "@/lib/validation";
+import {
+  addressValidation,
+  paymentValidation,
+} from "@/lib/validation/checkout";
+import {
+  FormType,
+  ValidationMessage,
+  ValidationResult,
+} from "@/lib/validation/types";
 import { Step } from "@/lib/types";
+
 import {
   Address,
   ADDRESS_DEFAULT,
@@ -266,21 +454,30 @@ import {
 
 @Component({
   components: {
+    TheHeader,
+    TheStepper,
     VButton,
     VCheckbox,
-    TheHeader,
     VInput,
     VRadio,
-    TheStepper,
+  },
+  methods: {
+    validateCountry,
+    validateEmail,
+    validatePhoneNumber,
+    validatePostalCode,
+    validateRequire,
   },
 })
 export default class Checkout extends Vue {
   protected billing = false;
-  protected billingAddress: Address = ADDRESS_DEFAULT;
+  protected billingAddress = asFormable(ADDRESS_DEFAULT, addressValidation);
+
   protected consent = false;
   protected newsletter = false;
-  protected payment: Payment = PAYMENT_DEFAULT;
-  protected shippingAddress: Address = ADDRESS_DEFAULT;
+  protected payment = asFormable(PAYMENT_DEFAULT, paymentValidation);
+
+  protected shippingAddress = asFormable(ADDRESS_DEFAULT, addressValidation);
 
   protected handlePaymentMethodChange(method: PaymentMethod): void {
     this.payment.method = method;
@@ -288,6 +485,34 @@ export default class Checkout extends Vue {
 
   protected handleSubmit(): void {
     console.log(this.shippingAddress.firstName);
+  }
+
+  protected handleValidation(
+    formType: FormType,
+    field: string,
+    result: ValidationResult<ValidationMessage>
+  ): void {
+    const { error, message } = result;
+
+    const failure = error && Boolean(message.length);
+
+    switch (formType) {
+      case "billingAddress":
+        this.billingAddress.helperText[field as keyof Address] = failure
+          ? message[0]
+          : "";
+        break;
+      case "payment":
+        this.payment.helperText[field as keyof Payment] = failure
+          ? message[0]
+          : "";
+        break;
+      case "shippingAddress":
+        this.shippingAddress.helperText[field as keyof Address] = failure
+          ? message[0]
+          : "";
+        break;
+    }
   }
 
   protected mounted(): void {
@@ -321,6 +546,10 @@ export default class Checkout extends Vue {
   margin: 1.6rem 0;
 }
 
+.field {
+  width: 100%;
+}
+
 .form {
   &__container {
     display: flex;
@@ -335,8 +564,8 @@ export default class Checkout extends Vue {
   font-weight: 400;
 }
 
-.input {
-  width: 100%;
+.label {
+  cursor: pointer;
 }
 
 .row {

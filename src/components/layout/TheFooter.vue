@@ -6,7 +6,7 @@
       <form class="form" @submit.prevent="handleSubmit">
         <v-input
           autocomplete="name"
-          class="input"
+          class="field"
           name="name"
           placeholder="Name"
           required
@@ -14,7 +14,7 @@
         />
         <v-input
           autocomplete="email"
-          class="input"
+          class="field"
           name="email"
           placeholder="Email"
           required
@@ -23,13 +23,13 @@
         />
         <v-input
           autocomplete=""
-          class="input"
+          class="field"
           placeholder="Subject"
           required
           v-model="subject"
         />
         <v-input
-          class="input"
+          class="field"
           placeholder="Message"
           required
           v-model="message"
@@ -133,6 +133,10 @@ export default class TheFooter extends Vue {
   }
 }
 
+.field {
+  width: 100%;
+}
+
 .form {
   display: flex;
   flex-direction: column;
@@ -158,10 +162,6 @@ export default class TheFooter extends Vue {
 
 .links {
   list-style-type: none;
-}
-
-.input {
-  width: 100%;
 }
 
 .paragraph {

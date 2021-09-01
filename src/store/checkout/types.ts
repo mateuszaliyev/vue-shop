@@ -1,6 +1,6 @@
 import { Product, PRODUCT_DEFAULT } from "@/store/product/types";
 
-export interface Address {
+export type Address = {
   address: string;
   city: string;
   country: string;
@@ -10,7 +10,7 @@ export interface Address {
   phoneNumber: string;
   postalCode: string;
   state: string;
-}
+};
 
 export interface CartItem extends Product {
   quantity: number;
@@ -28,22 +28,19 @@ export interface CheckoutState {
   shippingAddress: Address;
 }
 
-export type Payment = PaymentBankTransfer | PaymentCreditCard;
+export type Payment = PaymentBankTransfer &
+  PaymentCreditCard & { method: PaymentMethod };
 
-export interface PaymentBankTransfer {
+export type PaymentBankTransfer = {
   data: unknown;
-  method: PaymentMethod.BankTransfer;
-}
+};
 
-export interface PaymentCreditCard {
-  data: {
-    cardNumber: string;
-    expiryDate: string;
-    name: string;
-    securityCode: string;
-  };
-  method: PaymentMethod.CreditCard;
-}
+export type PaymentCreditCard = {
+  cardNumber: string;
+  expiryDate: string;
+  name: string;
+  securityCode: string;
+};
 
 export enum PaymentMethod {
   BankTransfer = "BANK_TRANSFER",
@@ -63,11 +60,10 @@ export const ADDRESS_DEFAULT: Address = {
 };
 
 export const PAYMENT_DEFAULT: Payment = {
-  data: {
-    cardNumber: "",
-    expiryDate: "",
-    name: "",
-    securityCode: "000",
-  },
+  cardNumber: "",
+  data: "",
+  expiryDate: "",
   method: PaymentMethod.CreditCard,
+  name: "",
+  securityCode: "",
 };

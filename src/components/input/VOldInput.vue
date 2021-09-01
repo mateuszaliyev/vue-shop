@@ -1,22 +1,17 @@
 <template>
-  <div class="wrapper">
-    <input
-      :autocomplete="autocomplete"
-      class="input"
-      :class="inputClasses"
-      @input="handleInput"
-      :max="max"
-      :min="min"
-      :name="name"
-      :placeholder="placeholder"
-      :required="required"
-      :type="type"
-      :value="value"
-    />
-    <p class="text" :class="textClasses" v-show="helperText">
-      {{ helperText }}
-    </p>
-  </div>
+  <input
+    :autocomplete="autocomplete"
+    class="input"
+    :class="classes"
+    @input="handleInput"
+    :max="max"
+    :min="min"
+    :name="name"
+    :placeholder="placeholder"
+    :required="required"
+    :type="type"
+    :value="value"
+  />
 </template>
 
 <script lang="ts">
@@ -31,9 +26,6 @@ export default class VInput extends Vue {
 
   @Prop({ default: false, required: false, type: Boolean })
   protected readonly error!: boolean;
-
-  @Prop({ default: "", required: false, type: String })
-  protected readonly helperText!: string;
 
   @Prop({ default: 0, required: false, type: Number })
   protected readonly max!: number;
@@ -53,8 +45,7 @@ export default class VInput extends Vue {
   @Prop({ default: "text", required: false, type: String })
   protected readonly type!: InputType;
 
-  @Prop({ default: "", required: true, type: [Number, String] })
-  protected readonly value!: InputType;
+  protected value = "";
 
   protected handleInput(event: Event): void {
     const target: HTMLInputElement = event.target as HTMLInputElement;
@@ -71,18 +62,11 @@ export default class VInput extends Vue {
     } else {
       this.$emit("input", target.value);
     }
-    this.$emit("change");
   }
 
-  protected get inputClasses(): { [key: string]: boolean } {
+  protected get classes(): { [key: string]: boolean } {
     return {
       "input--error": this.error,
-    };
-  }
-
-  protected get textClasses(): { [key: string]: boolean } {
-    return {
-      "text--error": this.error,
     };
   }
 }
@@ -102,22 +86,5 @@ export default class VInput extends Vue {
   &--error {
     border-color: colors.$primary;
   }
-}
-
-.text {
-  color: colors.$gray-600;
-  margin-left: 0.9rem;
-  margin-top: 0.4rem;
-  min-height: 2.4rem;
-
-  &--error {
-    color: colors.$primary;
-    font-weight: 700;
-  }
-}
-
-.wrapper {
-  display: flex;
-  flex-direction: column;
 }
 </style>

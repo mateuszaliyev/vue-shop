@@ -31,7 +31,7 @@
           </label>
           <label class="quantity--mobile" :for="`q-${item.id}`">Qty: </label>
           <v-input
-            class="input"
+            class="field"
             :id="`q-${item.id}`"
             :max="100"
             :min="1"
@@ -125,6 +125,15 @@ export default class ShoppingCartItem extends Vue {
   }
 }
 
+.field {
+  font-weight: 700;
+  width: 6.4rem;
+
+  @include breakpoints.respond-to("md") {
+    width: 8rem;
+  }
+}
+
 .figures {
   align-items: center;
   display: flex;
@@ -156,15 +165,6 @@ export default class ShoppingCartItem extends Vue {
   }
 }
 
-.input {
-  font-weight: 700;
-  width: 6.4rem;
-
-  @include breakpoints.respond-to("md") {
-    width: 8rem;
-  }
-}
-
 .item {
   align-items: center;
   display: flex;
@@ -189,6 +189,10 @@ export default class ShoppingCartItem extends Vue {
 }
 
 .quantity {
+  align-items: center;
+  display: flex;
+  gap: 0.8rem;
+
   &--desktop {
     display: none;
 

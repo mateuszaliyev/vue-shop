@@ -5,7 +5,7 @@
     <form @submit.prevent="handleSubmit">
       <v-input
         autocomplete="email"
-        class="input"
+        class="field"
         name="email"
         placeholder="Enter e-mail"
         required
@@ -44,15 +44,15 @@ export default class TheSubscribeSection extends Vue {
   margin: 1.5rem 0 1.6rem;
 }
 
+.field {
+  font-size: 1.5rem;
+  width: 100%;
+}
+
 .heading {
   font-size: 3.6rem;
   font-weight: 400;
   margin: 1rem 0;
-}
-
-.input {
-  font-size: 1.5rem;
-  width: 100%;
 }
 
 .paragraph {
