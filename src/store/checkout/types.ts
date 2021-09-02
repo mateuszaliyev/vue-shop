@@ -28,17 +28,11 @@ export interface CheckoutState {
   shippingAddress: Address;
 }
 
-export type Payment = PaymentBankTransfer &
-  PaymentCreditCard & { method: PaymentMethod };
-
-export type PaymentBankTransfer = {
-  data: unknown;
-};
-
-export type PaymentCreditCard = {
+export type Payment = {
+  cardName: string;
   cardNumber: string;
   expiryDate: string;
-  name: string;
+  method: PaymentMethod;
   securityCode: string;
 };
 
@@ -60,10 +54,9 @@ export const ADDRESS_DEFAULT: Address = {
 };
 
 export const PAYMENT_DEFAULT: Payment = {
+  cardName: "",
   cardNumber: "",
-  data: "",
   expiryDate: "",
   method: PaymentMethod.CreditCard,
-  name: "",
   securityCode: "",
 };

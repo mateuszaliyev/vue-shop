@@ -18,6 +18,7 @@
               )
             "
             class="field"
+            id="shipping-address-first-name"
             :error="Boolean(shippingAddress.helperText.firstName)"
             :helper-text="shippingAddress.helperText.firstName"
             name="fname"
@@ -37,6 +38,7 @@
             class="field"
             :error="Boolean(shippingAddress.helperText.lastName)"
             :helper-text="shippingAddress.helperText.lastName"
+            id="shipping-address-last-name"
             name="lname"
             placeholder="Last name"
             required
@@ -55,6 +57,7 @@
           class="field"
           :error="Boolean(shippingAddress.helperText.address)"
           :helper-text="shippingAddress.helperText.address"
+          id="shipping-address-address"
           name="address"
           placeholder="Address"
           required
@@ -73,6 +76,7 @@
             class="field"
             :error="Boolean(shippingAddress.helperText.city)"
             :helper-text="shippingAddress.helperText.city"
+            id="shipping-address-city"
             name="city"
             placeholder="City"
             required
@@ -90,6 +94,7 @@
             class="field"
             :error="Boolean(shippingAddress.helperText.state)"
             :helper-text="shippingAddress.helperText.state"
+            id="shipping-address-state"
             name="state"
             placeholder="State"
             required
@@ -111,6 +116,7 @@
             class="field"
             :error="Boolean(shippingAddress.helperText.postalCode)"
             :helper-text="shippingAddress.helperText.postalCode"
+            id="shipping-address-postal-code"
             name="postal"
             placeholder="Postal code"
             required
@@ -128,6 +134,7 @@
             class="field"
             :error="Boolean(shippingAddress.helperText.country)"
             :helper-text="shippingAddress.helperText.country"
+            id="shipping-address-country"
             name="country"
             placeholder="Country"
             required
@@ -147,6 +154,7 @@
             class="field"
             :error="Boolean(shippingAddress.helperText.email)"
             :helper-text="shippingAddress.helperText.email"
+            id="shipping-address-email"
             name="email"
             placeholder="Email"
             required
@@ -167,6 +175,7 @@
             class="field"
             :error="Boolean(shippingAddress.helperText.phoneNumber)"
             :helper-text="shippingAddress.helperText.phoneNumber"
+            id="shipping-address-phone-number"
             name="country"
             placeholder="Phone number"
             required
@@ -196,6 +205,7 @@
             class="field"
             :error="Boolean(billingAddress.helperText.firstName)"
             :helper-text="billingAddress.helperText.firstName"
+            id="billing-address-first-name"
             name="fname"
             placeholder="First name"
             :required="billing"
@@ -213,6 +223,7 @@
             class="field"
             :error="Boolean(billingAddress.helperText.lastName)"
             :helper-text="billingAddress.helperText.lastName"
+            id="billing-address-last-name"
             name="lname"
             placeholder="Last name"
             :required="billing"
@@ -231,6 +242,7 @@
           class="field"
           :error="Boolean(billingAddress.helperText.address)"
           :helper-text="billingAddress.helperText.address"
+          id="billing-address-address"
           name="address"
           placeholder="Address"
           :required="billing"
@@ -249,6 +261,7 @@
             class="field"
             :error="Boolean(billingAddress.helperText.city)"
             :helper-text="billingAddress.helperText.city"
+            id="billing-address-city"
             name="city"
             placeholder="City"
             :required="billing"
@@ -266,6 +279,7 @@
             class="field"
             :error="Boolean(billingAddress.helperText.state)"
             :helper-text="billingAddress.helperText.state"
+            id="billing-address-state"
             name="state"
             placeholder="State"
             :required="billing"
@@ -285,6 +299,7 @@
             class="field"
             :error="Boolean(billingAddress.helperText.postalCode)"
             :helper-text="billingAddress.helperText.postalCode"
+            id="billing-address-postal-code"
             name="postal"
             placeholder="Postal code"
             :required="billing"
@@ -302,30 +317,55 @@
             class="field"
             :error="Boolean(billingAddress.helperText.country)"
             :helper-text="billingAddress.helperText.country"
+            id="billing-address-country"
             name="country"
             placeholder="Country"
             :required="billing"
             v-model="billingAddress.country"
           />
         </div>
-        <v-input
-          autocomplete="billing phone"
-          @change="
-            handleValidation(
-              'billingAddress',
-              'phoneNumber',
-              billingAddress.validation.phoneNumber(billingAddress.phoneNumber)
-            )
-          "
-          class="field"
-          :error="Boolean(billingAddress.helperText.phoneNumber)"
-          :helper-text="billingAddress.helperText.phoneNumber"
-          name="country"
-          placeholder="Phone number"
-          type="tel"
-          :required="billing"
-          v-model="billingAddress.phoneNumber"
-        />
+        <div class="row">
+          <v-input
+            autocomplete="billing email"
+            @change="
+              handleValidation(
+                'billingAddress',
+                'email',
+                billingAddress.validation.email(billingAddress.email)
+              )
+            "
+            class="field"
+            :error="Boolean(billingAddress.helperText.email)"
+            :helper-text="billingAddress.helperText.email"
+            id="billing-address-email"
+            name="email"
+            placeholder="Email"
+            required
+            type="email"
+            v-model="billingAddress.email"
+          />
+          <v-input
+            autocomplete="billing phone"
+            @change="
+              handleValidation(
+                'billingAddress',
+                'phoneNumber',
+                billingAddress.validation.phoneNumber(
+                  billingAddress.phoneNumber
+                )
+              )
+            "
+            class="field"
+            :error="Boolean(billingAddress.helperText.phoneNumber)"
+            :helper-text="billingAddress.helperText.phoneNumber"
+            id="billing-address-phone-number"
+            name="country"
+            placeholder="Phone number"
+            type="tel"
+            :required="billing"
+            v-model="billingAddress.phoneNumber"
+          />
+        </div>
       </section>
       <section class="container form__container">
         <h2 class="headline">Payment method</h2>
@@ -352,6 +392,7 @@
             class="field"
             :error="Boolean(payment.helperText.cardNumber)"
             :helper-text="payment.helperText.cardNumber"
+            id="payment-card-number"
             name="cardnumber"
             placeholder="Card number"
             :required="payment.method === paymentMethodCreditCard"
@@ -359,16 +400,36 @@
           />
           <v-input
             autocomplete="payment cc-name"
+            @change="
+              handleValidation(
+                'payment',
+                'cardName',
+                payment.validation.cardName(payment.cardName)
+              )
+            "
             class="field"
+            :error="Boolean(payment.helperText.cardName)"
+            :helper-text="payment.helperText.cardName"
+            id="payment-card-name"
             name="ccname"
             placeholder="Name on card"
             :required="payment.method === paymentMethodCreditCard"
-            v-model="payment.name"
+            v-model="payment.cardName"
           />
           <div class="row">
             <v-input
               autocomplete="payment cc-exp"
+              @change="
+                handleValidation(
+                  'payment',
+                  'expiryDate',
+                  payment.validation.expiryDate(payment.expiryDate)
+                )
+              "
               class="field"
+              :error="Boolean(payment.helperText.expiryDate)"
+              :helper-text="payment.helperText.expiryDate"
+              id="payment-expiry-date"
               name="exp-date"
               placeholder="Expiry date (MM / YY)"
               :required="payment.method === paymentMethodCreditCard"
@@ -376,7 +437,17 @@
             />
             <v-input
               autocomplete="payment cc-csc"
+              @change="
+                handleValidation(
+                  'payment',
+                  'securityCode',
+                  payment.validation.securityCode(payment.securityCode)
+                )
+              "
               class="field"
+              :error="Boolean(payment.helperText.securityCode)"
+              :helper-text="payment.helperText.securityCode"
+              id="payment-security-code"
               name="cvc"
               placeholder="Security code (CVV)"
               :required="payment.method === paymentMethodCreditCard"
@@ -394,16 +465,34 @@
             >Bank transfer</label
           >
         </div>
+        <ul class="details" v-if="payment.method === paymentMethodBankTransfer">
+          <li class="details__item">
+            <span>Name</span>
+            <span>LOGO Vue (UK) Ltd.</span>
+          </li>
+          <li class="details__item">
+            <span>Bank name</span>
+            <span>Barclays PLC</span>
+          </li>
+          <li class="details__item">
+            <span>IBAN</span>
+            <span>GB 13 BUKB 601613 31926819</span>
+          </li>
+          <li class="details__item">
+            <span>Address</span>
+            <span>Fulham Rd, London SW6 1HS, United Kingdom</span>
+          </li>
+        </ul>
       </section>
       <section class="container form__container">
         <div class="checkbox">
           <v-checkbox id="consent" required v-model="consent" />
-          <label class="label" for="consent"> I'm 13+ years old. </label>
+          <label class="label" for="consent"> I'm 13+ years old.</label>
         </div>
         <div class="checkbox">
           <v-checkbox id="newsletter" v-model="newsletter" />
           <label class="label" for="newsletter">
-            I'd like to receive emails about exclusive sales and more
+            I'd like to receive emails about exclusive sales and more.
           </label>
         </div>
       </section>
@@ -425,14 +514,8 @@ import VRadio from "@/components/input/VRadio.vue";
 import TheStepper from "@/components/TheStepper.vue";
 
 import { CHECKOUT_STEPS } from "@/lib/constants";
-import {
-  asFormable,
-  validateCountry,
-  validateEmail,
-  validatePhoneNumber,
-  validatePostalCode,
-  validateRequire,
-} from "@/lib/validation";
+import kebabCase from "@/lib/utils/kebabCase";
+import { asFormable } from "@/lib/validation";
 import {
   addressValidation,
   paymentValidation,
@@ -461,13 +544,6 @@ import {
     VInput,
     VRadio,
   },
-  methods: {
-    validateCountry,
-    validateEmail,
-    validatePhoneNumber,
-    validatePostalCode,
-    validateRequire,
-  },
 })
 export default class Checkout extends Vue {
   protected billing = false;
@@ -479,12 +555,58 @@ export default class Checkout extends Vue {
 
   protected shippingAddress = asFormable(ADDRESS_DEFAULT, addressValidation);
 
+  protected handleFocus(id: string): void {
+    console.log(id);
+    (document.querySelector(`#${id}`) as HTMLInputElement).focus();
+  }
+
   protected handlePaymentMethodChange(method: PaymentMethod): void {
     this.payment.method = method;
   }
 
   protected handleSubmit(): void {
-    console.log(this.shippingAddress.firstName);
+    if (!this.consent) {
+      return;
+    }
+
+    for (const entry of Object.entries(this.shippingAddress.validation)) {
+      const [key, validator] = entry;
+
+      if (
+        validator &&
+        validator(this.shippingAddress[key as keyof Address]).error
+      ) {
+        this.handleFocus(kebabCase(`shippingAddress ${key}`));
+        return;
+      }
+    }
+
+    if (this.billing) {
+      for (const entry of Object.entries(this.billingAddress.validation)) {
+        const [key, validator] = entry;
+
+        if (
+          validator &&
+          validator(this.billingAddress[key as keyof Address]).error
+        ) {
+          this.handleFocus(kebabCase(`billingAddress ${key}`));
+          return;
+        }
+      }
+    }
+
+    if (this.payment.method === this.paymentMethodCreditCard) {
+      for (const entry of Object.entries(this.payment.validation)) {
+        const [key, validator] = entry;
+
+        if (validator && validator(this.payment[key as keyof Payment]).error) {
+          this.handleFocus(kebabCase(`payment ${key}`));
+          return;
+        }
+      }
+    }
+
+    this.$router.push("/summary");
   }
 
   protected handleValidation(
@@ -540,10 +662,29 @@ export default class Checkout extends Vue {
 </script>
 
 <style lang="scss" scoped>
+@use "../styles/breakpoints";
+@use "../styles/colors";
+
 .checkbox {
   display: flex;
   gap: 1.6rem;
   margin: 1.6rem 0;
+}
+
+.details {
+  background: colors.$gray-100;
+  list-style-type: none;
+
+  &__item {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1.6rem;
+
+    & > span {
+      display: block;
+      width: 50%;
+    }
+  }
 }
 
 .field {
@@ -570,8 +711,12 @@ export default class Checkout extends Vue {
 
 .row {
   display: flex;
-  flex: 1 1 0px;
+  flex-direction: column;
   gap: 1.6rem;
+
+  @include breakpoints.respond-to("md") {
+    flex-direction: row;
+  }
 }
 
 .stepper {

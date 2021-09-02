@@ -4,6 +4,7 @@
       :autocomplete="autocomplete"
       class="input"
       :class="inputClasses"
+      :id="id"
       @input="handleInput"
       :max="max"
       :min="min"
@@ -34,6 +35,9 @@ export default class VInput extends Vue {
 
   @Prop({ default: "", required: false, type: String })
   protected readonly helperText!: string;
+
+  @Prop({ default: "", required: false, type: String })
+  protected readonly id!: string;
 
   @Prop({ default: 0, required: false, type: Number })
   protected readonly max!: number;
@@ -98,6 +102,7 @@ export default class VInput extends Vue {
   font-size: inherit;
   line-height: 1.5;
   padding: 0.8rem;
+  width: 100%;
 
   &--error {
     border-color: colors.$primary;

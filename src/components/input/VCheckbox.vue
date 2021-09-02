@@ -91,6 +91,7 @@ export default class VCheckbox extends Vue {
   border: 2px solid colors.$text-primary;
   cursor: pointer;
   display: block;
+  flex-shrink: 0;
   height: 2.4rem;
   position: relative;
   width: 2.4rem;
