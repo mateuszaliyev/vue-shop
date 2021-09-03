@@ -16,6 +16,12 @@ const routes: RouteConfig[] = [
       import(/* webpackChunkName: "checkout" */ "../views/Checkout.vue"),
   },
   {
+    path: "/summary",
+    name: "Summary",
+    component: () =>
+      import(/* webpackChunkName: "summary" */ "../views/Summary.vue"),
+  },
+  {
     path: "/products/:id",
     name: "ProductCard",
     component: () =>

@@ -56,28 +56,19 @@ export default class ShoppingCart extends Vue {
   }
 
   protected get delivery(): number {
-    return this.cart.reduce(
-      (prev, item) =>
-        prev +
-        parseFloat(item.price.slice(1)) * 0.05 +
-        parseFloat(item.price.slice(1)) * item.quantity * 0.01,
-      0
-    );
+    return this.$store.getters.getDeliveryPrice;
   }
 
   protected get total(): number {
-    return this.delivery + this.totalPrice;
+    return this.$store.getters.getTotal;
   }
 
   protected get totalPrice(): number {
-    return this.cart.reduce(
-      (prev, item) => prev + parseFloat(item.price.slice(1)) * item.quantity,
-      0
-    );
+    return this.$store.getters.getTotalPrice;
   }
 
   protected get totalQuantity(): number {
-    return this.cart.reduce((prev, item) => prev + item.quantity, 0);
+    return this.$store.getters.getTotalQuantity;
   }
 }
 </script>
@@ -96,22 +87,6 @@ export default class ShoppingCart extends Vue {
   font-weight: 400;
   font-size: 2.4rem;
   width: 100%;
-}
-
-.modal {
-  &__button {
-    font-size: 1.5rem;
-    padding: 1.2rem 2.4rem;
-  }
-
-  &__content {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    gap: 2.4rem;
-    padding-top: 1.6rem;
-    text-align: center;
-  }
 }
 
 .summary {

@@ -30,7 +30,6 @@ export const addressValidation: Validation<Address> = {
     validateRequireWithOptions(value as string, "postal code", {
       test: REGEX.postalCode,
     }),
-  state: (value) => validateRequire(value as string, "state"),
 };
 
 export const paymentValidation: Validation<Payment> = {

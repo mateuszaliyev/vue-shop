@@ -1,9 +1,21 @@
 import { ActionTree } from "vuex";
 
-import { CartItem, CheckoutState } from "@/store/checkout/types";
+import {
+  Address,
+  ADDRESS_DEFAULT,
+  CartItem,
+  CheckoutState,
+  Payment,
+  PAYMENT_DEFAULT,
+} from "@/store/checkout/types";
 import { Product } from "@/store/product/types";
 import { RootState } from "@/store/types";
-import { SET_CART } from "@/store/checkout/mutation-types";
+import {
+  SET_BILLING_ADDRESS,
+  SET_CART,
+  SET_PAYMENT,
+  SET_SHIPPING_ADDRESS,
+} from "@/store/checkout/mutation-types";
 
 const actions: ActionTree<CheckoutState, RootState> = {
   addProductToACart(
@@ -44,6 +56,13 @@ const actions: ActionTree<CheckoutState, RootState> = {
     dispatch("storeCart");
   },
 
+  deleteOrder({ commit, dispatch }) {
+    dispatch("deleteCart");
+    commit(SET_BILLING_ADDRESS, ADDRESS_DEFAULT);
+    commit(SET_PAYMENT, PAYMENT_DEFAULT);
+    commit(SET_SHIPPING_ADDRESS, ADDRESS_DEFAULT);
+  },
+
   fetchCart({ commit, state }) {
     const localStorageCart: CartItem[] = localStorage.cart
       ? JSON.parse(localStorage.cart)
@@ -72,6 +91,20 @@ const actions: ActionTree<CheckoutState, RootState> = {
 
     commit(SET_CART, newCart);
     dispatch("storeCart");
+  },
+
+  setCheckoutData(
+    { commit },
+    payload: {
+      billingAddress: Address;
+      payment: Payment;
+      shippingAddress: Address;
+    }
+  ) {
+    const { billingAddress, payment, shippingAddress } = payload;
+    commit(SET_BILLING_ADDRESS, billingAddress);
+    commit(SET_PAYMENT, payment);
+    commit(SET_SHIPPING_ADDRESS, shippingAddress);
   },
 
   storeCart({ state }) {

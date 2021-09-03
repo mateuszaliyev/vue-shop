@@ -9,7 +9,6 @@ export type Address = {
   lastName: string;
   phoneNumber: string;
   postalCode: string;
-  state: string;
 };
 
 export interface CartItem extends Product {
@@ -37,8 +36,8 @@ export type Payment = {
 };
 
 export enum PaymentMethod {
-  BankTransfer = "BANK_TRANSFER",
-  CreditCard = "CREDIT_CARD",
+  BankTransfer = "Bank transfer",
+  CreditCard = "Credit card",
 }
 
 export const ADDRESS_DEFAULT: Address = {
@@ -50,7 +49,6 @@ export const ADDRESS_DEFAULT: Address = {
   lastName: "",
   phoneNumber: "",
   postalCode: "",
-  state: "",
 };
 
 export const PAYMENT_DEFAULT: Payment = {

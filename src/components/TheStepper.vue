@@ -80,7 +80,7 @@ export default class TheStepper extends Vue {
   }
 
   &--done {
-    background: colors.$primary;
+    background: colors.$text-primary;
   }
 }
 

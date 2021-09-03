@@ -83,26 +83,6 @@
             v-model="shippingAddress.city"
           />
           <v-input
-            autocomplete="shipping address-level1"
-            @change="
-              handleValidation(
-                'shippingAddress',
-                'state',
-                shippingAddress.validation.state(shippingAddress.state)
-              )
-            "
-            class="field"
-            :error="Boolean(shippingAddress.helperText.state)"
-            :helper-text="shippingAddress.helperText.state"
-            id="shipping-address-state"
-            name="state"
-            placeholder="State"
-            required
-            v-model="shippingAddress.state"
-          />
-        </div>
-        <div class="row">
-          <v-input
             autocomplete="shipping postal-code"
             @change="
               handleValidation(
@@ -122,25 +102,25 @@
             required
             v-model="shippingAddress.postalCode"
           />
-          <v-input
-            autocomplete="shipping country"
-            @change="
-              handleValidation(
-                'shippingAddress',
-                'country',
-                shippingAddress.validation.country(shippingAddress.country)
-              )
-            "
-            class="field"
-            :error="Boolean(shippingAddress.helperText.country)"
-            :helper-text="shippingAddress.helperText.country"
-            id="shipping-address-country"
-            name="country"
-            placeholder="Country"
-            required
-            v-model="shippingAddress.country"
-          />
         </div>
+        <v-input
+          autocomplete="shipping country"
+          @change="
+            handleValidation(
+              'shippingAddress',
+              'country',
+              shippingAddress.validation.country(shippingAddress.country)
+            )
+          "
+          class="field"
+          :error="Boolean(shippingAddress.helperText.country)"
+          :helper-text="shippingAddress.helperText.country"
+          id="shipping-address-country"
+          name="country"
+          placeholder="Country"
+          required
+          v-model="shippingAddress.country"
+        />
         <div class="row">
           <v-input
             autocomplete="shipping email"
@@ -268,26 +248,6 @@
             v-model="billingAddress.city"
           />
           <v-input
-            autocomplete="billing address-level1"
-            @change="
-              handleValidation(
-                'billingAddress',
-                'state',
-                billingAddress.validation.state(billingAddress.state)
-              )
-            "
-            class="field"
-            :error="Boolean(billingAddress.helperText.state)"
-            :helper-text="billingAddress.helperText.state"
-            id="billing-address-state"
-            name="state"
-            placeholder="State"
-            :required="billing"
-            v-model="billingAddress.state"
-          />
-        </div>
-        <div class="row">
-          <v-input
             autocomplete="billing postal-code"
             @change="
               handleValidation(
@@ -305,25 +265,25 @@
             :required="billing"
             v-model="billingAddress.postalCode"
           />
-          <v-input
-            autocomplete="billing country"
-            @change="
-              handleValidation(
-                'billingAddress',
-                'country',
-                billingAddress.validation.country(billingAddress.country)
-              )
-            "
-            class="field"
-            :error="Boolean(billingAddress.helperText.country)"
-            :helper-text="billingAddress.helperText.country"
-            id="billing-address-country"
-            name="country"
-            placeholder="Country"
-            :required="billing"
-            v-model="billingAddress.country"
-          />
         </div>
+        <v-input
+          autocomplete="billing country"
+          @change="
+            handleValidation(
+              'billingAddress',
+              'country',
+              billingAddress.validation.country(billingAddress.country)
+            )
+          "
+          class="field"
+          :error="Boolean(billingAddress.helperText.country)"
+          :helper-text="billingAddress.helperText.country"
+          id="billing-address-country"
+          name="country"
+          placeholder="Country"
+          :required="billing"
+          v-model="billingAddress.country"
+        />
         <div class="row">
           <v-input
             autocomplete="billing email"
@@ -513,7 +473,7 @@ import VInput from "@/components/input/VInput.vue";
 import VRadio from "@/components/input/VRadio.vue";
 import TheStepper from "@/components/TheStepper.vue";
 
-import { CHECKOUT_STEPS } from "@/lib/constants";
+import { CHECKOUT_STEPS, COUNTRIES } from "@/lib/constants";
 import kebabCase from "@/lib/utils/kebabCase";
 import { asFormable } from "@/lib/validation";
 import {
@@ -521,6 +481,7 @@ import {
   paymentValidation,
 } from "@/lib/validation/checkout";
 import {
+  Formable,
   FormType,
   ValidationMessage,
   ValidationResult,
@@ -606,6 +567,34 @@ export default class Checkout extends Vue {
       }
     }
 
+    const billingAddress = this.billingAddress;
+    (["helperText", "validation"] as (keyof Formable<Address>)[]).forEach(
+      (key) => delete billingAddress[key]
+    );
+
+    const payment = this.payment;
+    (["helperText", "validation"] as (keyof Formable<Payment>)[]).forEach(
+      (key) => delete payment[key]
+    );
+
+    const shippingAddress = this.shippingAddress;
+    (["helperText", "validation"] as (keyof Formable<Address>)[]).forEach(
+      (key) => delete shippingAddress[key]
+    );
+
+    if (billingAddress.country.length === 2) {
+      billingAddress.country = COUNTRIES[billingAddress.country];
+    }
+
+    if (shippingAddress.country.length === 2) {
+      shippingAddress.country = COUNTRIES[shippingAddress.country];
+    }
+
+    this.$store.dispatch("setCheckoutData", {
+      billingAddress,
+      payment,
+      shippingAddress,
+    });
     this.$router.push("/summary");
   }
 

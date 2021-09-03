@@ -36,7 +36,7 @@ export default class VInput extends Vue {
   @Prop({ default: "", required: false, type: String })
   protected readonly helperText!: string;
 
-  @Prop({ default: "", required: false, type: String })
+  @Prop({ required: false, type: [String] })
   protected readonly id!: string;
 
   @Prop({ default: 0, required: false, type: Number })
