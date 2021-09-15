@@ -14,7 +14,7 @@ const actions: ActionTree<ProductState, RootState> = {
 
     try {
       const res = await fetch(
-        "http://www.mocky.io/v2/5ab0d1882e0000e60ae8b7a6"
+        "https://www.mocky.io/v2/5ab0d1882e0000e60ae8b7a6"
       );
 
       if (!res.ok) {
