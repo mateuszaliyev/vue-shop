@@ -11,22 +11,22 @@
           <span
             >{{ totalQuantity }} item{{ totalQuantity === 1 ? "" : "s" }}</span
           >
-          <span>{{ `$${totalPrice.toFixed(2)}` }}</span>
+          <span>{{ totalPrice | price }}</span>
         </li>
         <li class="table__item">
           <span>Delivery</span>
-          <span>{{ `$${delivery.toFixed(2)}` }}</span>
+          <span>{{ delivery | price }}</span>
         </li>
         <li class="table__item total">
           <span>Total</span>
-          <span>{{ `$${total.toFixed(2)}` }}</span>
+          <span>{{ total | price }}</span>
         </li>
       </ul>
     </section>
     <section class="container summary__container">
       <h2 class="headline">Order details</h2>
       <ul class="cart">
-        <li class="item" :key="index" v-for="(item, index) in cart">
+        <li class="item" :key="item.id" v-for="item in cart">
           <div class="image__container">
             <img :alt="item.productName" class="image" :src="item.image" />
           </div>

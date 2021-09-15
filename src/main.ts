@@ -14,6 +14,7 @@ library.add(...icons);
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 Vue.directive("frag", frag);
+Vue.filter("price", (value: number): string => `$${value.toFixed(2)}`);
 
 Vue.config.productionTip = false;
 

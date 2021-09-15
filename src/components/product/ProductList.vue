@@ -1,9 +1,9 @@
 <template>
   <div class="list">
     <product-list-item
-      :key="index"
+      :key="product.id"
       :product="product"
-      v-for="(product, index) in products"
+      v-for="product in products"
     />
   </div>
 </template>

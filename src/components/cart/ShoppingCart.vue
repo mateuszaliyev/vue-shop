@@ -12,15 +12,15 @@
           <span
             >{{ totalQuantity }} item{{ totalQuantity === 1 ? "" : "s" }}</span
           >
-          <span>{{ `$${totalPrice.toFixed(2)}` }}</span>
+          <span>{{ totalPrice | price }}</span>
         </li>
         <li class="table__item">
           <span>Delivery</span>
-          <span>{{ `$${delivery.toFixed(2)}` }}</span>
+          <span>{{ delivery | price }}</span>
         </li>
         <li class="table__item total">
           <span>Total</span>
-          <span>{{ `$${total.toFixed(2)}` }}</span>
+          <span>{{ total | price }}</span>
         </li>
       </ul>
       <v-button @click="handleSubmit" v-if="this.cart.length"
