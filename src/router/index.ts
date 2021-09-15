@@ -41,7 +41,6 @@ const routes: RouteConfig[] = [
 ];
 
 const router = new VueRouter({
-  mode: "history",
   routes,
   scrollBehavior: (to) => {
     if (to.hash) {
